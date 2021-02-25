@@ -1,0 +1,38 @@
+.field {
+  margin-top: 20px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  &-row {
+    display: flex;
+    width: 100%;
+    flex: 1;
+  }
+
+  &-ceil {
+    flex: 1;
+    margin: 1px;
+    cursor: pointer;
+    border: 1px solid #d9d9d9;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .1s ease;
+
+    &:hover {
+      background: darken(#ffffff, 5%);
+    }
+  }
+
+  &-ceil_open {
+    border-radius: 0;
+    background: #242424;
+    color: #fff;
+    &:hover {
+      background: #242424;
+    }
+  }
+}
