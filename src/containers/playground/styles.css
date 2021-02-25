@@ -1,0 +1,33 @@
+.playground {
+  min-width: 500px;
+  min-height: 500px;
+  margin: 0 auto;
+  width: 500px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: inset 6px 6px 14px #a8a8a8, inset -6px -6px 14px #ffffff;
+}
+.playground-header {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.playground-header .boomberman {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+.playground-header .bombs-indicator, .playground-header .timer {
+  font-family: "Press Start 2P", cursive;
+  color: orangered;
+  padding: 5px;
+  border-radius: 0;
+  background: #242424;
+  box-shadow: inset 6px 6px 14px #181818, inset -6px -6px 14px #303030;
+}
+
+/*# sourceMappingURL=styles.css.map */

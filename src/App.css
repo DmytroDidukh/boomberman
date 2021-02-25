@@ -13,16 +13,26 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.app-header {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2em;
 }
+
+/*.app-header span:nth-child(1) {*/
+/*  color: orange;*/
+/*}*/
+
+.app-header span {
+  color: orangered;
+}
+
+/*.app-header span:nth-child(3) {*/
+/*  color: blue;*/
+/*}*/
+
+/*.app-header span:nth-child(4) {*/
+/*  color: yellow;*/
+/*}*/
 
 .App-link {
   color: #61dafb;
