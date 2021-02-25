@@ -1,1 +1,2 @@
-export const OPEN_CEIL = 'OPEN_CEIL'
+export const CEIL_OPEN = 'CEIL_OPEN'
+export const CEIL_SET_FLAG = 'CEIL_SET_FLAG'

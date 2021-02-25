@@ -1,4 +1,4 @@
-import {OPEN_CEIL} from "./types";
+import {CEIL_OPEN, CEIL_SET_FLAG} from "./types";
 
 export const initialState = {
     numberOfBombs: 30,
@@ -17,13 +17,23 @@ export const initialState = {
 
 export const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case OPEN_CEIL: {
+        case CEIL_OPEN: {
             const [wrapperIndex, innerIndex] = action.payload
 
             const newField = [...state.field]
             newField[wrapperIndex][innerIndex].isClicked = true
 
-            console.log('click')
+            return {
+                ...state,
+                field: newField
+            }
+        }
+        case CEIL_SET_FLAG: {
+            const [wrapperIndex, innerIndex] = action.payload
+
+            const newField = [...state.field]
+            const oldFlagValue = newField[wrapperIndex][innerIndex].flag
+            newField[wrapperIndex][innerIndex].flag = !oldFlagValue
 
             return {
                 ...state,

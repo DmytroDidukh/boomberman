@@ -27,6 +27,10 @@
     }
   }
 
+  &-ceil_closed svg {
+    color: orangered;
+  }
+
   &-ceil_open {
     border-radius: 0;
     background: #242424;

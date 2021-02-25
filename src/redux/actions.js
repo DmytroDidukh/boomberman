@@ -1,6 +1,11 @@
-import {OPEN_CEIL} from "./types";
+import {CEIL_OPEN, CEIL_SET_FLAG} from "./types";
 
-export const ceilClick = (id) => ({
-    type: OPEN_CEIL,
+export const ceilOpen = (id) => ({
+    type: CEIL_OPEN,
+    payload: id
+})
+
+export const ceilSetFlag = (id) => ({
+    type: CEIL_SET_FLAG,
     payload: id
 })
