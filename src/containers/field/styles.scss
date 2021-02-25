@@ -1,0 +1,13 @@
+.field {
+  margin-top: 20px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  &-row {
+    display: flex;
+    width: 100%;
+    flex: 1;
+  }
+}

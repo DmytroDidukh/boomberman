@@ -2,11 +2,9 @@ import React, {useEffect, useState} from "react";
 
 import './styles.scss'
 import Timer from "../../components/timer";
-import Field from "../../components/field";
+import Field from "../field";
 
 const Playground = () => {
-
-
     return (
         <main className='playground'>
             <section className='playground-header'>

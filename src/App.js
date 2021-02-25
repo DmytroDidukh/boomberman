@@ -1,15 +1,27 @@
-import './App.css';
 import Playground from "./containers/playground";
+import StartMenu from "./containers/start-menu";
+
+import './App.css';
+import {useSelector} from "react-redux";
 
 function App() {
-  return (
-    <div className="App">
-        <header className='app-header'>
-            <h1>b<span>OO</span>mberman</h1>
-        </header>
-        <Playground/>
-    </div>
-  );
+    const {gameMode, gameStatus, fieldSize} = useSelector(({gameMode, gameStatus, fieldSize}) => ({
+        gameMode,
+        gameStatus,
+        fieldSize
+    }))
+
+    return (
+        <div className="App">
+            <header className='app-header'>
+                <h1>b<span>OO</span>mberman</h1>
+            </header>
+            {
+                gameStatus === 'preparing' ? <StartMenu/> : <Playground/>
+            }
+
+        </div>
+    );
 }
 
 export default App;

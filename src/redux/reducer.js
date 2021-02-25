@@ -1,18 +1,18 @@
-import {CEIL_OPEN, CEIL_SET_FLAG} from "./types";
+import {
+    CEIL_OPEN,
+    CEIL_SET_FLAG,
+    CHANGE_FIELD_SIZE,
+    CHANGE_GAME_MODE,
+    CHANGE_GAME_STATUS
+} from "./types";
+import createField from "../utils/createField";
 
 export const initialState = {
     numberOfBombs: 30,
     numberOfFlags: 30,
-    gameStatus: 'playing',
-    field: Array(10).fill([]).map((_, wrapperIndex) => (
-        Array(10).fill(0).map((_, innerIndex) => ({
-            id: [wrapperIndex, innerIndex],
-            bomb: false,
-            flag: false,
-            num: 0,
-            isClicked: false
-        }))
-    ))
+    gameStatus: 'preparing',
+    gameMode: 'normal',
+    field: createField(10)
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -38,6 +38,34 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 field: newField
+            }
+        }
+        case CHANGE_GAME_STATUS: {
+            const [wrapperIndex, innerIndex] = action.payload
+
+            const newField = [...state.field]
+            const oldFlagValue = newField[wrapperIndex][innerIndex].flag
+            newField[wrapperIndex][innerIndex].flag = !oldFlagValue
+
+            return {
+                ...state,
+                field: newField
+            }
+        }
+        case CHANGE_FIELD_SIZE: {
+            return {
+                ...state,
+                field: createField(action.payload)
+            }
+        }
+        case CHANGE_GAME_MODE: {
+            const {gameMode} = state
+            const gameModePercentage = gameMode === 'easy' ? .1 : gameMode === 'normal' ? .3 : .6
+
+            return {
+                ...state,
+                gameMode: action.payload,
+                numberOfBombs: state.field.length * 10 * gameModePercentage
             }
         }
         default: {
