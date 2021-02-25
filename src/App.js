@@ -1,7 +1,7 @@
 import Playground from "./containers/playground";
 import StartMenu from "./containers/start-menu";
 
-import './App.css';
+import './App.scss';
 import {useSelector} from "react-redux";
 
 function App() {
