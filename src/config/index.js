@@ -15,4 +15,5 @@ export const GAME_STATUS_DATA = {
     paused: 'paused',
     playing: 'playing',
     lost: 'lost',
+    review: 'review',
 }

@@ -1,18 +1,23 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import {openCell, setFlag} from "../../redux/actions";
+import {changeGameStatus, openCell, setFlag} from "../../redux/actions";
 import Cell from "../../components/cell";
 import getAroundCellsCords from "../../utils/getAroundCellsCords";
+import {GAME_STATUS_DATA} from "../../config";
 import './styles.scss'
 
 
-const Field = () => {
-    const field = useSelector(({field}) => field)
+const Field = ({setDialogOpen}) => {
+    const {field, numberOfFlags, gameStatus} = useSelector(state => state)
     const dispatch = useDispatch()
 
     const cellClickHandler = (e, id) => {
-        if (!field[id.y][id.x].num && !field[id.y][id.x].bomb) {
+        if (gameStatus === GAME_STATUS_DATA.review) {
+            return
+        }
+
+        if (field[id.y][id.x].num === 0 && !field[id.y][id.x].bomb) {
             const zerosAround = getAroundCellsCords(id.x, id.y, field.length).filter(cords => !field[cords.y][cords.x].num)
             zerosAround.forEach(({x, y}) => dispatch(openCell({x, y})))
 
@@ -22,6 +27,8 @@ const Field = () => {
                 .forEach(({id: {x, y}}) => dispatch(openCell({x, y})))
             )
 
+            dispatch(changeGameStatus(GAME_STATUS_DATA.lost))
+            setDialogOpen(true)
             console.log('GAME OVER!!!')
         }
 
@@ -30,6 +37,10 @@ const Field = () => {
 
     const cellRightClickHandler = (e, id) => {
         e.preventDefault()
+
+        if (!numberOfFlags && !field[id.y][id.x].flag || gameStatus === GAME_STATUS_DATA.review) {
+            return
+        }
 
         dispatch(setFlag(id))
     }
