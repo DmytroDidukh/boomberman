@@ -10,8 +10,8 @@ import createField from "../utils/createField";
 import getPercentageOfFieldItems from "../utils/getPercentageOfFieldItems";
 
 export const initialState = {
-    numberOfBombs: 30,
-    numberOfFlags: 30,
+    numberOfBombs: 20,
+    numberOfFlags: 20,
     gameStatus: 'preparing',
     gameMode: 'normal',
     field: createField(10),

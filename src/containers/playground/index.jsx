@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import RefreshIcon from '@material-ui/icons/Refresh';
 import {useDispatch, useSelector} from "react-redux";
+import IconButton from '@material-ui/core/IconButton';
+import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 
 import Timer from "../../components/timer";
 import Field from "../field";
@@ -30,6 +32,11 @@ const Playground = () => {
         setDialogOpen(false)
     }
 
+    const handlePauseGame = () => {
+        setDialogOpen(prev => !prev)
+        dispatch(changeGameStatus(dialogOpen ? GAME_STATUS_DATA.playing : GAME_STATUS_DATA.paused))
+    }
+
     const refreshField = () => {
         setMinutes(0)
         setSeconds(0)
@@ -39,30 +46,55 @@ const Playground = () => {
         dispatch(setField(updatedField))
     }
 
+    const getDialogTitle = () => {
+        switch (gameStatus) {
+            case GAME_STATUS_DATA.paused:
+                return 'PAUSED';
+            case GAME_STATUS_DATA.won:
+                return 'CONGRATS! YOU WIN';
+            default:
+                return 'GAME OVER'
+        }
+    }
+
     return (
         <main className='playground'>
             <section className='playground-header'>
-                {gameStatus === GAME_STATUS_DATA.review &&
-                <div className='refresh-button' onClick={refreshField}><RefreshIcon/></div>}
                 <div className='bombs-indicator'>Flags: {numberOfFlags}</div>
+                {gameStatus === GAME_STATUS_DATA.review &&
+                <IconButton className='refresh-button' onClick={refreshField}>
+                    <RefreshIcon/>
+                </IconButton>
+                }
                 <div className='boomberman'>&#128520;</div>
-                {gameStatus === GAME_STATUS_DATA.playing && <Timer
-                    minutes={minutes}
-                    seconds={seconds}
-                    setMinutes={setMinutes}
-                    setSeconds={setSeconds}/>}
+                {
+                    gameStatus === GAME_STATUS_DATA.playing && <>
+                        <IconButton className='pause-button' onClick={handlePauseGame}>
+                            <PauseCircleOutlineIcon/>
+                        </IconButton>
+                        <Timer
+                            minutes={minutes}
+                            seconds={seconds}
+                            setMinutes={setMinutes}
+                            setSeconds={setSeconds}/>
+                    </>
+                }
             </section>
             <Field setDialogOpen={setDialogOpen}/>
-            <AlertDialog open={dialogOpen}
-                         handleGoReplay={handleGoReplay}
-                         handleReviewField={handleReviewField}
-                         handleGoLeaderboard={handleGoReplay}
-                         title={gameStatus === GAME_STATUS_DATA.lost || gameStatus === GAME_STATUS_DATA.review ?
-                             "GAME OVER"
-                             : "CONGRATS! YOU WIN"}
-                         userName='Bob Dylan'
-                         time={`${minutes < 10 ? '0' + minutes : minutes} min ${seconds < 10 ? '0' + seconds : seconds} sec`}
-            />
+            {
+                gameStatus === GAME_STATUS_DATA.playing ?
+                    null :
+                    <AlertDialog open={dialogOpen}
+                                 gameStatus={gameStatus}
+                                 handleGoReplay={handleGoReplay}
+                                 handleReviewField={handleReviewField}
+                                 handleGoLeaderboard={handleGoReplay}
+                                 handlePauseGame={handlePauseGame}
+                                 title={getDialogTitle()}
+                                 userName='Bob Dylan'
+                                 time={`${minutes < 10 ? '0' + minutes : minutes} min ${seconds < 10 ? '0' + seconds : seconds} sec`}
+                    />
+            }
         </main>
     )
 }

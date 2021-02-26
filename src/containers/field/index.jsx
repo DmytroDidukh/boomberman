@@ -22,7 +22,6 @@ const Field = ({setDialogOpen}) => {
                 .filter(cords => !field[cords.y][cords.x].bomb)
 
             safeCells.forEach(({x, y}) => dispatch(openCell({x, y})))
-
         } else if (field[id.y][id.x].bomb) {
             field.forEach(parent => parent
                 .filter(child => child.bomb)
@@ -34,17 +33,15 @@ const Field = ({setDialogOpen}) => {
             return;
         }
 
-
+        dispatch(openCell(id))
         const openedCellsLength = field
             .map(parent => parent.filter(child => child.click).length)
-            .reduce((sum, num) => sum + num, 1)
+            .reduce((sum, num) => sum + num, 0)
 
         if (field.length * 10 === openedCellsLength + numberOfBombs) {
             dispatch(changeGameStatus(GAME_STATUS_DATA.won))
             setDialogOpen(true)
         }
-
-        dispatch(openCell(id))
     }
 
     const cellRightClickHandler = (e, id) => {

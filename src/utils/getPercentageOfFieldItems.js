@@ -1,3 +1,3 @@
-const getPercentageOfFieldItems = (gameMode) => gameMode === 'easy' ? .1 : gameMode === 'normal' ? .3 : .6;
+const getPercentageOfFieldItems = (gameMode) => gameMode === 'easy' ? .1 : gameMode === 'normal' ? .2 : .5;
 
 export default getPercentageOfFieldItems

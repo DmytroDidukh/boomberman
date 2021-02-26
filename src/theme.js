@@ -85,6 +85,7 @@ const theme = createMuiTheme({
         MuiDialogActions: {
             root: {
                 marginBottom: 8,
+                justifyContent: 'center'
             },
         },
         MuiDialogTitle: {
