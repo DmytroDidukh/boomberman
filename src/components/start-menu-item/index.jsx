@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {MenuItem, Typography, Select, FormControl} from "@material-ui/core";
+import {MenuItem, Select, FormControl} from "@material-ui/core";
 
 import './styles.scss'
 
@@ -18,7 +18,6 @@ const StartMenuItem = ({data, initialValue, id, dispatch, action}) => {
             <h4>{id}:</h4>
             <FormControl>
                 <Select
-                    data-id={data.id}
                     value={value}
                     onChange={handleChange}
                     displayEmpty

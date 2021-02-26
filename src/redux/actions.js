@@ -3,7 +3,8 @@ import {
     CEIL_SET_FLAG,
     CHANGE_FIELD_SIZE,
     CHANGE_GAME_MODE,
-    CHANGE_GAME_STATUS
+    CHANGE_GAME_STATUS,
+    SET_FIELD_WITH_BOMBS
 } from "./types";
 
 export const ceilOpen = (id) => ({
@@ -29,4 +30,9 @@ export const changeGameMode = (mode) => ({
 export const changeGameStatus = (status) => ({
     type: CHANGE_GAME_STATUS,
     payload: status
+})
+
+export const setFieldWithBombs = (updatedField) => ({
+    type: SET_FIELD_WITH_BOMBS,
+    payload: updatedField
 })

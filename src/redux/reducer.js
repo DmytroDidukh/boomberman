@@ -3,6 +3,7 @@ import {
     CEIL_SET_FLAG,
     CHANGE_FIELD_SIZE,
     CHANGE_GAME_MODE,
+    SET_FIELD_WITH_BOMBS,
     CHANGE_GAME_STATUS
 } from "./types";
 import createField from "../utils/createField";
@@ -11,7 +12,7 @@ import getPercentageOfFieldItems from "../utils/getPercentageOfFieldItems";
 export const initialState = {
     numberOfBombs: 30,
     numberOfFlags: 30,
-    gameStatus: 'playing',
+    gameStatus: 'preparing',
     gameMode: 'normal',
     field: createField(10)
 }
@@ -70,6 +71,12 @@ export const rootReducer = (state = initialState, action) => {
                 gameMode: action.payload,
                 numberOfBombs: numberOfItems,
                 numberOfFlags: numberOfItems,
+            }
+        }
+        case SET_FIELD_WITH_BOMBS: {
+            return {
+                ...state,
+                field: action.payload
             }
         }
         default: {
