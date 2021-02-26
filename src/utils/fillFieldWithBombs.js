@@ -1,3 +1,5 @@
+import fillFieldWithNumbers from "./fillFieldWithNumbers";
+
 const random = (min, max) => Math.floor(min + Math.random() * (max - min))
 
 const fillFieldWithBombs = (field, length, numberOfBombs) => {
@@ -13,7 +15,7 @@ const fillFieldWithBombs = (field, length, numberOfBombs) => {
         }
     }
 
-    return updatedField
+    return fillFieldWithNumbers(updatedField)
 }
 
 export default fillFieldWithBombs;

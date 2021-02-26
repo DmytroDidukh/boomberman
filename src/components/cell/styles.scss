@@ -1,4 +1,4 @@
-.field-ceil {
+.field-cell {
   margin: 1px;
   cursor: pointer;
   border: 1px solid #d9d9d9;
@@ -16,11 +16,11 @@
   }
 }
 
-.field-ceil_closed svg {
+.field-cell_closed svg {
   color: orangered;
 }
 
-.field-ceil_open {
+.field-cell_open {
   border-radius: 0;
   background: #242424;
   color: #fff;

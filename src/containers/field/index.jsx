@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {ceilOpen, ceilSetFlag} from "../../redux/actions";
 import './styles.scss'
-import Ceil from "../../components/ceil";
+import Cell from "../../components/cell";
 
 
 const Field = () => {
@@ -22,7 +22,7 @@ const Field = () => {
                     <div key={index} className='field-row'>
                         {
                             wrapper.map(child =>
-                                <Ceil
+                                <Cell
                                     key={child.id}
                                     ceil={child}
                                     clickHandler={ceilClickHandler}
