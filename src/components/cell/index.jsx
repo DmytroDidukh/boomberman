@@ -6,7 +6,7 @@ import './styles.scss'
 const Cell = ({cell, clickHandler, rightClickHandler}) => (
     <>
         {
-            !cell.isClicked ? (
+            !cell.click ? (
                 <span className='field-cell field-cell_closed'
                       onContextMenu={(e) => rightClickHandler(e, cell.id)}
                       onClick={(e) => clickHandler(e, cell.id)}>

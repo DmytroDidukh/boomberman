@@ -5,7 +5,7 @@ const createField = (length) => (
             bomb: false,
             flag: false,
             num: 0,
-            isClicked: false
+            click: false
         }))
     ))
 )

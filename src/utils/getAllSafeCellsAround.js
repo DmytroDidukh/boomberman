@@ -1,33 +1,27 @@
 import getAroundCellsCords from "./getAroundCellsCords";
 
-let arr = []
-
 const getAllSafeCellsAround = (x, y, field) => {
+    let arr = []
 
-    /*.filter(cords => !field[cords.y][cords.x].bomb && !field[cords.y][cords.x].isClicked)*/
+    const getCellsToOpen = (xInner, yInner) => {
+        if (field[yInner][xInner].num !== 0) {
+            return
+        }
 
-    debugger
-    const safeCells = getAroundCellsCords(x, y, field.length)
-    debugger
-    const safeCells2 = safeCells.filter(cords => arr.findIndex(resultCords => resultCords.x === cords.x && resultCords.y === cords.y) === -1)
+        const cordsCellsAround = getAroundCellsCords(xInner, yInner, field.length)
+            .filter(cords => arr.findIndex(resCords => resCords.x === cords.x && resCords.y === cords.y) === -1)
 
-    debugger
-    arr.push(safeCells2)
-    arr = arr.flat()
-    console.log(arr, 'arrrrrrrrrrr')
-    // console.log(safeCells2.length)
-    console.log(safeCells2)
+        arr.push(cordsCellsAround)
+        arr = arr.flat()
 
-    //debugger
-    if (safeCells2.length) {
-        const arr2 = safeCells2.map(cell => getAllSafeCellsAround(cell.x, cell.y, safeCells2))
-
+        if (cordsCellsAround.length) {
+            cordsCellsAround.map(cell => getCellsToOpen(cell.x, cell.y))
+        }
     }
 
+    getCellsToOpen(x, y)
+
     return arr
-
-    //if (getAroundCellsCords(x, y, field.length).length)
-
 }
 
-export default getAllSafeCellsAround
+export default getAllSafeCellsAround;

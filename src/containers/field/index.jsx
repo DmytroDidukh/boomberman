@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 
 import Cell from "../../components/cell";
 import {changeGameStatus, openCell, setFlag} from "../../redux/actions";
-import getAroundCellsCords from "../../utils/getAroundCellsCords";
 import getAllSafeCellsAround from "../../utils/getAllSafeCellsAround";
 import {GAME_STATUS_DATA} from "../../config";
 import './styles.scss'
@@ -19,12 +18,8 @@ const Field = ({setDialogOpen}) => {
         }
 
         if (field[id.y][id.x].num === 0 && !field[id.y][id.x].bomb) {
-            const safeCells = getAllSafeCellsAround(id.x, id.y, field)
-            //const zerosAround = getAroundCellsCords(id.x, id.y, field.length).filter(cords => !field[cords.y][cords.x].bomb)
-
-            //const cellsAroundZerosWithoutBombs = getAllSafeCellsAround(zerosAround, field)
-            //console.log(safeCells)
-            //cellsAroundZerosWithoutBombs.forEach((item) => item.forEach(({x, y}) => dispatch(openCell({x, y}))))
+            const safeCells = getAllSafeCellsAround(id.x, id.y, field, field.length)
+                .filter(cords => !field[cords.y][cords.x].bomb)
 
             safeCells.forEach(({x, y}) => dispatch(openCell({x, y})))
 
@@ -41,7 +36,7 @@ const Field = ({setDialogOpen}) => {
 
 
         const openedCellsLength = field
-            .map(parent => parent.filter(child => child.isClicked).length)
+            .map(parent => parent.filter(child => child.click).length)
             .reduce((sum, num) => sum + num, 1)
 
         if (field.length * 10 === openedCellsLength + numberOfBombs) {
