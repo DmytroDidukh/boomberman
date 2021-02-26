@@ -3,8 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {openCell, setFlag} from "../../redux/actions";
 import Cell from "../../components/cell";
-import './styles.scss'
 import getAroundCellsCords from "../../utils/getAroundCellsCords";
+import './styles.scss'
 
 
 const Field = () => {
@@ -16,8 +16,13 @@ const Field = () => {
             const zerosAround = getAroundCellsCords(id.x, id.y, field.length).filter(cords => !field[cords.y][cords.x].num)
             zerosAround.forEach(({x, y}) => dispatch(openCell({x, y})))
 
-        } else {
-            console.log('GAME OVER BITCH!')
+        } else if (field[id.y][id.x].bomb) {
+            field.forEach(parent => parent
+                .filter(child => child.bomb)
+                .forEach(({id: {x, y}}) => dispatch(openCell({x, y})))
+            )
+
+            console.log('GAME OVER!!!')
         }
 
         dispatch(openCell(id))
