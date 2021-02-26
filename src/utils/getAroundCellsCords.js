@@ -1,4 +1,5 @@
 const getAroundCellsCords = (x, y, length) => {
+
     return [
         {x: x - 1, y: y - 1},
         {x: x, y: y - 1},
