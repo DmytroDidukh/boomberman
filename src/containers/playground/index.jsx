@@ -48,7 +48,9 @@ const Playground = () => {
             <AlertDialog open={dialogOpen}
                          handleGoReplay={handleGoReplay}
                          handleReviewField={handleReviewField}
-                         handleGoLeaderboard={handleGoReplay}/>
+                         handleGoLeaderboard={handleGoReplay}
+                         title={gameStatus === GAME_STATUS_DATA.lost ? "GAME OVER" : "CONGRATS! YOU WIN"}
+            />
         </main>
     )
 }
