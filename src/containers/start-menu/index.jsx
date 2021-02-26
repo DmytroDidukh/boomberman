@@ -1,18 +1,17 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-
-import './styles.scss'
-import StartMenuItem from "../../components/start-menu-item";
-import {changeFieldSize, changeGameMode} from "../../redux/actions";
-import {FIELD_SIZE_DATA, GAME_MODE_DATA} from "../../config";
 import {Button} from "@material-ui/core";
 
+import StartMenuItem from "../../components/start-menu-item";
+import {changeFieldSize, changeGameMode, changeGameStatus} from "../../redux/actions";
+import {FIELD_SIZE_DATA, GAME_MODE_DATA, GAME_STATUS_DATA} from "../../config";
+import './styles.scss'
 
 const StartMenu = () => {
     const dispatch = useDispatch()
 
     const startGame = () => {
-        dispatch()
+        dispatch(changeGameStatus(GAME_STATUS_DATA.playing))
     }
 
     return (

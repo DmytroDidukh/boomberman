@@ -26,7 +26,7 @@ export const changeGameMode = (mode) => ({
     payload: mode
 })
 
-export const changeFieldStatus = (status) => ({
+export const changeGameStatus = (status) => ({
     type: CHANGE_GAME_STATUS,
     payload: status
 })

@@ -11,7 +11,7 @@ import getPercentageOfFieldItems from "../utils/getPercentageOfFieldItems";
 export const initialState = {
     numberOfBombs: 30,
     numberOfFlags: 30,
-    gameStatus: 'preparing',
+    gameStatus: 'playing',
     gameMode: 'normal',
     field: createField(10)
 }
@@ -38,19 +38,14 @@ export const rootReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                field: newField
+                field: newField,
+                numberOfFlags: oldFlagValue ? state.numberOfFlags + 1 : state.numberOfFlags - 1
             }
         }
         case CHANGE_GAME_STATUS: {
-            const [wrapperIndex, innerIndex] = action.payload
-
-            const newField = [...state.field]
-            const oldFlagValue = newField[wrapperIndex][innerIndex].flag
-            newField[wrapperIndex][innerIndex].flag = !oldFlagValue
-
             return {
                 ...state,
-                field: newField
+                gameStatus: action.payload
             }
         }
         case CHANGE_FIELD_SIZE: {

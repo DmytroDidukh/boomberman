@@ -9,3 +9,10 @@ export const FIELD_SIZE_DATA = [
     {value: 20, name: '20x20'},
     {value: 30, name: '30x30'}
 ]
+
+export const GAME_STATUS_DATA = {
+    preparing: 'preparing',
+    paused: 'paused',
+    playing: 'playing',
+    lost: 'lost',
+}

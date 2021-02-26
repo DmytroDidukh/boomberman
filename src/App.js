@@ -1,8 +1,10 @@
+import {useSelector} from "react-redux";
+
 import Playground from "./containers/playground";
 import StartMenu from "./containers/start-menu";
+import {GAME_STATUS_DATA} from './config'
 
 import './App.scss';
-import {useSelector} from "react-redux";
 
 function App() {
     const {gameMode, gameStatus, fieldSize} = useSelector(({gameMode, gameStatus, fieldSize}) => ({

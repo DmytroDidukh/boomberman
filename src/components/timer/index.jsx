@@ -4,10 +4,10 @@ import './styles.scss'
 
 const Timer = () => {
     const [minutes, setMinutes] = useState(0);
-    const [seconds, setSeconds] = useState(50);
+    const [seconds, setSeconds] = useState(0);
 
     useEffect(() => {
-        let myInterval = setInterval(() => {
+        let interval = setInterval(() => {
             if (seconds === 59) {
                 setSeconds(0);
                 setMinutes(minutes + 1)
@@ -17,7 +17,7 @@ const Timer = () => {
 
         }, 1000)
 
-        return () => clearInterval(myInterval);
+        return () => clearInterval(interval);
     });
 
     return (

@@ -9,8 +9,6 @@ const StartMenuItem = ({data, initialValue, id, dispatch, action}) => {
     const handleChange = (e) => {
         const target = data.find(item => item.value === e.target.value)
 
-        console.log(id)
-        console.log(target.name.toLocaleLowerCase())
         setValue(target.value)
         dispatch(action(id === 'Field size' ? target.value : target.name.toLocaleLowerCase()))
     };

@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import EmojiFlagsIcon from '@material-ui/icons/EmojiFlags';
 
 import {ceilOpen, ceilSetFlag} from "../../redux/actions";
 import './styles.scss'
@@ -24,6 +23,7 @@ const Field = () => {
                         {
                             wrapper.map(child =>
                                 <Ceil
+                                    key={child.id}
                                     ceil={child}
                                     clickHandler={ceilClickHandler}
                                 />
