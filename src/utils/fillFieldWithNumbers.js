@@ -1,10 +1,10 @@
 import checkAroundCells from "./checkAroundCells";
 
 const fillFieldWithNumbers = (field) => {
-    return field.map((parent, parentIndex) => (
-        parent.map((child, childIndex) => {
+    return field.map(parent => (
+        parent.map(child => {
 
-                const cellsAround = checkAroundCells(field, parentIndex, childIndex, 'bomb').filter(item => item)
+                const cellsAround = checkAroundCells(field, child.id, 'bomb').filter(item => item)
 
                 return {
                     ...child,

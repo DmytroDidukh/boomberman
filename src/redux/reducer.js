@@ -10,7 +10,7 @@ import createField from "../utils/createField";
 import getPercentageOfFieldItems from "../utils/getPercentageOfFieldItems";
 
 export const initialState = {
-    numberOfBombs: 5,
+    numberOfBombs: 30,
     numberOfFlags: 30,
     gameStatus: 'preparing',
     gameMode: 'normal',
@@ -20,10 +20,10 @@ export const initialState = {
 export const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case OPEN_CELL: {
-            const [wrapperIndex, innerIndex] = action.payload
+            const {x, y} = action.payload
 
             const newField = [...state.field]
-            newField[wrapperIndex][innerIndex].isClicked = true
+            newField[y][x].isClicked = true
 
             return {
                 ...state,
@@ -31,11 +31,11 @@ export const rootReducer = (state = initialState, action) => {
             }
         }
         case SET_FLAG: {
-            const [wrapperIndex, innerIndex] = action.payload
+            const {x, y} = action.payload
 
             const newField = [...state.field]
-            const oldFlagValue = newField[wrapperIndex][innerIndex].flag
-            newField[wrapperIndex][innerIndex].flag = !oldFlagValue
+            const oldFlagValue = newField[y][x].flag
+            newField[y][x].flag = !oldFlagValue
 
             return {
                 ...state,

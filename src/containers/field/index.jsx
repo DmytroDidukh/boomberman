@@ -3,8 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {openCell, setFlag} from "../../redux/actions";
 import Cell from "../../components/cell";
-import checkAroundCells from "../../utils/checkAroundCells";
 import './styles.scss'
+import getAroundCellsCords from "../../utils/getAroundCellsCords";
 
 
 const Field = () => {
@@ -12,17 +12,21 @@ const Field = () => {
     const dispatch = useDispatch()
 
     const cellClickHandler = (e, id) => {
+        if (!field[id.y][id.x].num && !field[id.y][id.x].bomb) {
+            const zerosAround = getAroundCellsCords(id.x, id.y, field.length).filter(cords => !field[cords.y][cords.x].num)
+            zerosAround.forEach(({x, y}) => dispatch(openCell({x, y})))
+
+        } else {
+            console.log('GAME OVER BITCH!')
+        }
+
+        dispatch(openCell(id))
+    }
+
+    const cellRightClickHandler = (e, id) => {
         e.preventDefault()
 
-        if (e.type === 'click') {
-            const zerosAround = checkAroundCells(field, id[0], id[1], 'num').filter(item => !item)
-
-            console.log(zerosAround)
-
-            dispatch(openCell(id))
-        } else {
-            dispatch(setFlag(id))
-        }
+        dispatch(setFlag(id))
     }
 
     return (
@@ -33,9 +37,10 @@ const Field = () => {
                         {
                             wrapper.map(child =>
                                 <Cell
-                                    key={child.id}
-                                    ceil={child}
+                                    key={`${child.id.y} + ${child.id.x}`}
+                                    cell={child}
                                     clickHandler={cellClickHandler}
+                                    rightClickHandler={cellRightClickHandler}
                                 />
                             )
                         }

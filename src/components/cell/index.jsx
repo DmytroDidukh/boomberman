@@ -3,24 +3,23 @@ import EmojiFlagsIcon from '@material-ui/icons/EmojiFlags';
 
 import './styles.scss'
 
-const Cell = ({ceil, clickHandler}) => {
+const Cell = ({cell, clickHandler, rightClickHandler}) => {
 
-    const getCeilInner = () => {
-        return ceil.bomb ? <span>&#128163;</span> : ceil.num
+    const getCellInner = () => {
+        return cell.bomb ? <span>&#128163;</span> : cell.num
     }
 
     return (
         <>
             {
-                !ceil.isClicked ? (
-                    <span key={ceil.id.join('')} className='field-cell field-cell_closed'
-                          onContextMenu={(e) => clickHandler(e, ceil.id)}
-                          onClick={(e) => clickHandler(e, ceil.id)}>
-                                        {ceil.flag && <EmojiFlagsIcon/>}
+                !cell.isClicked ? (
+                    <span className='field-cell field-cell_closed'
+                          onContextMenu={(e) => rightClickHandler(e, cell.id)}
+                          onClick={(e) => clickHandler(e, cell.id)}>
+                                        {cell.flag && <EmojiFlagsIcon/>}
                                     </span>
                 ) : (
-                    <span key={ceil.id.join('')}
-                          className='field-cell field-cell_open'>{getCeilInner()}</span>
+                    <span className='field-cell field-cell_open'>{getCellInner()}</span>
                 )
             }
         </>
