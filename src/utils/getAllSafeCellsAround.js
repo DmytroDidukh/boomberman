@@ -1,24 +1,30 @@
 import getAroundCellsCords from "./getAroundCellsCords";
 
-const arr = []
+let arr = []
 
 const getAllSafeCellsAround = (x, y, field) => {
 
     /*.filter(cords => !field[cords.y][cords.x].bomb && !field[cords.y][cords.x].isClicked)*/
 
-    console.log(getAroundCellsCords(x, y, field.length))
-    const safeCells = getAroundCellsCords(x, y, field.length).filter(cords => !arr.find((item) => item.x === cords.x && item.y === cords.y))
-    arr.push(safeCells)
-    console.log(safeCells.length)
-    console.log(safeCells)
+    debugger
+    const safeCells = getAroundCellsCords(x, y, field.length)
+    debugger
+    const safeCells2 = safeCells.filter(cords => arr.findIndex(resultCords => resultCords.x === cords.x && resultCords.y === cords.y) === -1)
+
+    debugger
+    arr.push(safeCells2)
+    arr = arr.flat()
+    console.log(arr, 'arrrrrrrrrrr')
+    // console.log(safeCells2.length)
+    console.log(safeCells2)
 
     //debugger
-    if (safeCells.length) {
-        const arr2 = safeCells.map(cell => getAllSafeCellsAround(cell.x, cell.y, safeCells))
-        console.log(arr2)
+    if (safeCells2.length) {
+        const arr2 = safeCells2.map(cell => getAllSafeCellsAround(cell.x, cell.y, safeCells2))
+
     }
 
-    return []
+    return arr
 
     //if (getAroundCellsCords(x, y, field.length).length)
 
