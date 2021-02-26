@@ -53,19 +53,27 @@ export const rootReducer = (state = initialState, action) => {
             }
         }
         case CHANGE_FIELD_SIZE: {
+            const {gameMode} = state
+            const gameModePercentage = gameMode === 'easy' ? .1 : gameMode === 'normal' ? .3 : .6;
+            const numberOfItems = action.payload * 10 * gameModePercentage
+
             return {
                 ...state,
-                field: createField(action.payload)
+                field: createField(action.payload),
+                numberOfBombs: numberOfItems,
+                numberOfFlags: numberOfItems,
             }
         }
         case CHANGE_GAME_MODE: {
-            const {gameMode} = state
-            const gameModePercentage = gameMode === 'easy' ? .1 : gameMode === 'normal' ? .3 : .6
+            const gameMode = action.payload
+            const gameModePercentage = gameMode === 'easy' ? .1 : gameMode === 'normal' ? .3 : .6;
+            const numberOfItems = state.field.length * 10 * gameModePercentage
 
             return {
                 ...state,
                 gameMode: action.payload,
-                numberOfBombs: state.field.length * 10 * gameModePercentage
+                numberOfBombs: numberOfItems,
+                numberOfFlags: numberOfItems,
             }
         }
         default: {

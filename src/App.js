@@ -19,7 +19,6 @@ function App() {
             {
                 gameStatus === 'preparing' ? <StartMenu/> : <Playground/>
             }
-
         </div>
     );
 }
