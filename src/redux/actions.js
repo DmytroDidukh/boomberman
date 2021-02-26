@@ -4,7 +4,8 @@ import {
     CHANGE_FIELD_SIZE,
     CHANGE_GAME_MODE,
     CHANGE_GAME_STATUS,
-    SET_FIELD
+    SET_FIELD,
+    SET_TIMER,
 } from "./types";
 
 export const openCell = (id) => ({
@@ -35,4 +36,9 @@ export const changeGameStatus = (status) => ({
 export const setField = (updatedField) => ({
     type: SET_FIELD,
     payload: updatedField
+})
+
+export const setTimer = (timerData) => ({
+    type: SET_TIMER,
+    payload: timerData
 })

@@ -29,7 +29,6 @@ const Field = ({setDialogOpen}) => {
 
             dispatch(changeGameStatus(GAME_STATUS_DATA.lost))
             setDialogOpen(true)
-            console.log('GAME OVER!!!')
             return;
         }
 
@@ -37,10 +36,8 @@ const Field = ({setDialogOpen}) => {
         const openedCellsLength = field
             .map(parent => parent.filter(child => child.isClicked).length)
             .reduce((sum, num) => sum + num, 1)
-        console.log(openedCellsLength)
 
         if (field.length * 10 === openedCellsLength + numberOfBombs) {
-            console.log('YOU WON')
             dispatch(changeGameStatus(GAME_STATUS_DATA.won))
             setDialogOpen(true)
         }

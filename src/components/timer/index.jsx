@@ -1,13 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 
 import './styles.scss'
 
-const Timer = () => {
-    const [minutes, setMinutes] = useState(0);
-    const [seconds, setSeconds] = useState(0);
+const Timer = ({seconds, minutes, setMinutes, setSeconds}) => {
 
     useEffect(() => {
-        let interval = setInterval(() => {
+        let myInterval = setInterval(() => {
             if (seconds === 59) {
                 setSeconds(0);
                 setMinutes(minutes + 1)
@@ -17,7 +15,7 @@ const Timer = () => {
 
         }, 1000)
 
-        return () => clearInterval(interval);
+        return () => clearInterval(myInterval);
     });
 
     return (
