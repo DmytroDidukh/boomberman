@@ -1,19 +1,19 @@
 import {
-    CEIL_OPEN,
-    CEIL_SET_FLAG,
+    OPEN_CELL,
+    SET_FLAG,
     CHANGE_FIELD_SIZE,
     CHANGE_GAME_MODE,
     CHANGE_GAME_STATUS,
-    SET_FIELD_WITH_BOMBS
+    SET_FIELD
 } from "./types";
 
-export const ceilOpen = (id) => ({
-    type: CEIL_OPEN,
+export const openCell = (id) => ({
+    type: OPEN_CELL,
     payload: id
 })
 
-export const ceilSetFlag = (id) => ({
-    type: CEIL_SET_FLAG,
+export const setFlag = (id) => ({
+    type: SET_FLAG,
     payload: id
 })
 
@@ -32,7 +32,7 @@ export const changeGameStatus = (status) => ({
     payload: status
 })
 
-export const setFieldWithBombs = (updatedField) => ({
-    type: SET_FIELD_WITH_BOMBS,
+export const setField = (updatedField) => ({
+    type: SET_FIELD,
     payload: updatedField
 })

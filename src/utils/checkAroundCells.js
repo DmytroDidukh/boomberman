@@ -1,5 +1,5 @@
 const checkBombOrZero = (data, wrapIndex, innerIndex, key) => {
-    return !!data[wrapIndex] && !!data[wrapIndex][innerIndex] && data[wrapIndex][innerIndex][key]
+    return !!data[wrapIndex] && !!data[wrapIndex][innerIndex] && !!data[wrapIndex][innerIndex][key]
 }
 
 const checkAroundCells = (field, parentIndex, childIndex, key) => {
@@ -14,7 +14,7 @@ const checkAroundCells = (field, parentIndex, childIndex, key) => {
         checkBombOrZero(field, [parentIndex + 1], [childIndex], key),
         checkBombOrZero(field, [parentIndex + 1], [childIndex + 1], key),
     ]
-        .filter(item => item)
+
 }
 
 export default checkAroundCells;

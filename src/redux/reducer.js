@@ -1,9 +1,9 @@
 import {
-    CEIL_OPEN,
-    CEIL_SET_FLAG,
+    OPEN_CELL,
+    SET_FLAG,
     CHANGE_FIELD_SIZE,
     CHANGE_GAME_MODE,
-    SET_FIELD_WITH_BOMBS,
+    SET_FIELD,
     CHANGE_GAME_STATUS
 } from "./types";
 import createField from "../utils/createField";
@@ -19,7 +19,7 @@ export const initialState = {
 
 export const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CEIL_OPEN: {
+        case OPEN_CELL: {
             const [wrapperIndex, innerIndex] = action.payload
 
             const newField = [...state.field]
@@ -30,7 +30,7 @@ export const rootReducer = (state = initialState, action) => {
                 field: newField
             }
         }
-        case CEIL_SET_FLAG: {
+        case SET_FLAG: {
             const [wrapperIndex, innerIndex] = action.payload
 
             const newField = [...state.field]
@@ -73,7 +73,7 @@ export const rootReducer = (state = initialState, action) => {
                 numberOfFlags: numberOfItems,
             }
         }
-        case SET_FIELD_WITH_BOMBS: {
+        case SET_FIELD: {
             return {
                 ...state,
                 field: action.payload
