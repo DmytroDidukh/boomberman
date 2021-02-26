@@ -50,6 +50,7 @@ const Field = ({setDialogOpen}) => {
     const cellRightClickHandler = (e, id) => {
         e.preventDefault()
 
+        // eslint-disable-next-line no-mixed-operators
         if (!numberOfFlags && !field[id.y][id.x].flag || gameStatus === GAME_STATUS_DATA.review) {
             return
         }
