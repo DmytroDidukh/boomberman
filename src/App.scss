@@ -7,11 +7,6 @@
   align-items: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -23,21 +18,9 @@
   font-size: 2em;
 }
 
-/*.app-header span:nth-child(1) {*/
-/*  color: orange;*/
-/*}*/
-
 .app-header span {
   color: orangered;
 }
-
-/*.app-header span:nth-child(3) {*/
-/*  color: blue;*/
-/*}*/
-
-/*.app-header span:nth-child(4) {*/
-/*  color: yellow;*/
-/*}*/
 
 .App-link {
   color: #61dafb;

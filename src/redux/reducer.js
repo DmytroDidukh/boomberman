@@ -6,6 +6,7 @@ import {
     CHANGE_GAME_STATUS
 } from "./types";
 import createField from "../utils/createField";
+import getPercentageOfFieldItems from "../utils/getPercentageOfFieldItems";
 
 export const initialState = {
     numberOfBombs: 30,
@@ -54,7 +55,7 @@ export const rootReducer = (state = initialState, action) => {
         }
         case CHANGE_FIELD_SIZE: {
             const {gameMode} = state
-            const gameModePercentage = gameMode === 'easy' ? .1 : gameMode === 'normal' ? .3 : .6;
+            const gameModePercentage = getPercentageOfFieldItems(gameMode)
             const numberOfItems = action.payload * 10 * gameModePercentage
 
             return {
@@ -66,7 +67,7 @@ export const rootReducer = (state = initialState, action) => {
         }
         case CHANGE_GAME_MODE: {
             const gameMode = action.payload
-            const gameModePercentage = gameMode === 'easy' ? .1 : gameMode === 'normal' ? .3 : .6;
+            const gameModePercentage = getPercentageOfFieldItems(gameMode)
             const numberOfItems = state.field.length * 10 * gameModePercentage
 
             return {

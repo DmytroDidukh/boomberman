@@ -28,7 +28,6 @@
     }
 
     .bombs-indicator, .timer {
-      font-family: 'Press Start 2P', cursive;
       color: orangered;
       padding: 5px;
       @include boxShadows(#242424, #181818, #303030);

@@ -1,13 +1,3 @@
-const getPercentageOfFieldItems = (length) => (
-    Array(length).fill([]).map((_, wrapperIndex) => (
-        Array(length).fill(0).map((_, innerIndex) => ({
-            id: [wrapperIndex, innerIndex],
-            bomb: false,
-            flag: false,
-            num: 0,
-            isClicked: false
-        }))
-    ))
-)
+const getPercentageOfFieldItems = (gameMode) => gameMode === 'easy' ? .1 : gameMode === 'normal' ? .3 : .6;
 
-export default createField
+export default getPercentageOfFieldItems

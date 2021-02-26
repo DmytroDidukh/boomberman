@@ -17,7 +17,7 @@ const StartMenuItem = ({data, initialValue, id, dispatch, action}) => {
 
     return (
         <div className="preview-menu-item">
-            <Typography variant='h6'>{id}:</Typography>
+            <h4>{id}:</h4>
             <FormControl>
                 <Select
                     data-id={data.id}

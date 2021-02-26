@@ -1,20 +1,19 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
+import {useDispatch} from "react-redux";
 
 import './styles.scss'
 import StartMenuItem from "../../components/start-menu-item";
 import {changeFieldSize, changeGameMode} from "../../redux/actions";
 import {FIELD_SIZE_DATA, GAME_MODE_DATA} from "../../config";
-import {FormControl, MenuItem, Select, Typography, FormHelperText} from "@material-ui/core";
+import {Button} from "@material-ui/core";
 
 
 const StartMenu = () => {
-    const {gameMode, gameStatus, fieldSize} = useSelector(({gameMode, gameStatus, fieldSize}) => ({
-        gameMode,
-        gameStatus,
-        fieldSize
-    }))
     const dispatch = useDispatch()
+
+    const startGame = () => {
+        dispatch()
+    }
 
     return (
         <section className='preview-menu'>
@@ -28,6 +27,13 @@ const StartMenu = () => {
                            dispatch={dispatch}
                            initialValue={1}
                            id='Game mode'/>
+            <Button variant="contained"
+                    color="primary"
+                    className='start-button'
+                    onClick={startGame}
+            >
+                START
+            </Button>
         </section>
     )
 }
