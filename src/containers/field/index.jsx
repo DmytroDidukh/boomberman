@@ -1,8 +1,8 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import {changeGameStatus, openCell, setFlag} from "../../redux/actions";
 import Cell from "../../components/cell";
+import {changeGameStatus, openCell, setFlag} from "../../redux/actions";
 import getAroundCellsCords from "../../utils/getAroundCellsCords";
 import {GAME_STATUS_DATA} from "../../config";
 import './styles.scss'

@@ -1,7 +1,5 @@
 import React, {useEffect} from "react";
 
-import './styles.scss'
-
 const Timer = ({seconds, minutes, setMinutes, setSeconds}) => {
 
     useEffect(() => {

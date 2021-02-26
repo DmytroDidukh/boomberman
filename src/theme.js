@@ -1,6 +1,4 @@
 import {createMuiTheme} from "@material-ui/core";
-import {red} from '@material-ui/core/colors'
-
 
 const theme = createMuiTheme({
     typography: {
@@ -27,25 +25,9 @@ const theme = createMuiTheme({
         secondary: {
             main: '#0B172A'
         },
-        error: {
-            main: red.A400
-        },
-        background: {
-            default: '#0B172A',
-            lighten: '#0f4a8a',
-            darken: '#010915'
-        }
     },
     shadows: [],
     overrides: {
-        MuiGrid: {
-            'spacing-xs-2': {
-                margin: 0
-            },
-            'spacing-xs-3': {
-                margin: 0
-            }
-        },
         MuiPaper: {
             root: {
                 backgroundColor: '#0B172A',
@@ -93,29 +75,9 @@ const theme = createMuiTheme({
                 }
             }
         },
-        MuiListItemIcon: {
-            root: {
-                color: 'inherit',
-                minWidth: 35
-            }
-        },
-        MuiFilledInput: {
-            underline: {
-                '&:after': {
-                    borderBottomWidth: '2px'
-                },
-                '&:before': {
-                    borderColor: '#fff',
-                    borderBottomWidth: '2px'
-                },
-            },
-            input: {
-                backgroundColor: 'rgb(245, 248, 250)'
-            },
-        },
         MuiDialog: {
             paper: {
-                borderRadius: 15,
+                borderRadius: 0,
                 backgroundColor: '#0B172A',
                 color: '#fff'
             },
@@ -131,13 +93,7 @@ const theme = createMuiTheme({
                 marginBottom: 10,
                 padding: '10px 15px',
                 '& h2': {
-                    display: 'flex',
-                    alignItems: 'center',
-                    fontWeight: 800
-                },
-                '& button': {
-                    padding: 8,
-                    marginRight: 20
+                    textAlign: 'center',
                 }
             }
         },

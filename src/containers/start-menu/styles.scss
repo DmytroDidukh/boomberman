@@ -1,7 +1,12 @@
-.start-menu {
-  display: flex;
-}
-
 .start-button {
   margin-top: 20px !important;
+}
+
+.start-menu-item {
+  display: flex;
+  align-items: center;
+
+  & > * {
+    margin: 10px;
+  }
 }

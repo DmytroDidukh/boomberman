@@ -5,7 +5,6 @@ import {
     CHANGE_GAME_MODE,
     SET_FIELD,
     CHANGE_GAME_STATUS,
-    SET_TIMER,
 } from "./types";
 import createField from "../utils/createField";
 import getPercentageOfFieldItems from "../utils/getPercentageOfFieldItems";
@@ -16,7 +15,6 @@ export const initialState = {
     gameStatus: 'preparing',
     gameMode: 'normal',
     field: createField(10),
-    timer: {min: 0, sec: 0}
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -79,12 +77,6 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 field: action.payload
-            }
-        }
-        case SET_TIMER: {
-            return {
-                ...state,
-                timer: action.payload
             }
         }
         default: {

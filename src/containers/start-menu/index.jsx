@@ -4,9 +4,9 @@ import {Button} from "@material-ui/core";
 
 import StartMenuItem from "../../components/start-menu-item";
 import {changeFieldSize, changeGameMode, changeGameStatus, setField} from "../../redux/actions";
+import fillFieldWithBombs from "../../utils/fillFieldWithBombs";
 import {FIELD_SIZE_DATA, GAME_MODE_DATA, GAME_STATUS_DATA} from "../../config";
 import './styles.scss'
-import fillFieldWithBombs from "../../utils/fillFieldWithBombs";
 
 const StartMenu = () => {
     const {field, numberOfBombs} = useSelector(({field, numberOfBombs}) => ({
@@ -23,7 +23,7 @@ const StartMenu = () => {
     }
 
     return (
-        <section className='preview-menu'>
+        <section className='start-menu'>
             <StartMenuItem data={FIELD_SIZE_DATA}
                            action={changeFieldSize}
                            dispatch={dispatch}

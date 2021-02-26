@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {MenuItem, Select, FormControl} from "@material-ui/core";
 
-import './styles.scss'
 
 const StartMenuItem = ({data, initialValue, id, dispatch, action}) => {
     const [value, setValue] = useState(initialValue)
@@ -14,7 +13,7 @@ const StartMenuItem = ({data, initialValue, id, dispatch, action}) => {
     };
 
     return (
-        <div className="preview-menu-item">
+        <div className="start-menu-item">
             <h4>{id}:</h4>
             <FormControl>
                 <Select

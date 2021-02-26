@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useState} from "react";
 import RefreshIcon from '@material-ui/icons/Refresh';
 import {useDispatch, useSelector} from "react-redux";
 
@@ -6,9 +6,9 @@ import Timer from "../../components/timer";
 import Field from "../field";
 import AlertDialog from "../../components/dialog";
 import {changeGameStatus, setField} from "../../redux/actions";
-import {GAME_STATUS_DATA} from "../../config";
 import createField from "../../utils/createField";
 import fillFieldWithBombs from "../../utils/fillFieldWithBombs";
+import {GAME_STATUS_DATA} from "../../config";
 import './styles.scss'
 
 const Playground = () => {
