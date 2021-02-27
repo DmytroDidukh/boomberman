@@ -88,7 +88,7 @@ const Playground = () => {
                                  gameStatus={gameStatus}
                                  handleGoReplay={handleGoReplay}
                                  handleReviewField={handleReviewField}
-                                 handleGoLeaderboard={handleGoReplay}
+                                 /*handleGoLeaderboard={handleGoReplay}*/
                                  handlePauseGame={handlePauseGame}
                                  title={getDialogTitle()}
                                  userName='Bob Dylan'

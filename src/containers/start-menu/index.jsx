@@ -32,7 +32,7 @@ const StartMenu = () => {
             <StartMenuItem data={GAME_MODE_DATA}
                            action={changeGameMode}
                            dispatch={dispatch}
-                           initialValue={1}
+                           initialValue={0}
                            id='Game mode'/>
             <Button variant="contained"
                     color="primary"
