@@ -1,18 +1,17 @@
 import {useSelector} from "react-redux";
-import dotenv from 'dotenv'
 
 import Playground from "./containers/playground";
 import StartMenu from "./containers/start-menu";
-import {postUsersLeaderboard} from "./db/config";
+//import {postUsersLeaderboard, getTopTenUsersLeaderboard} from "./db/db";
 
 import './App.scss';
 
-dotenv.config()
 
 function App() {
     const {gameMode, gameStatus} = useSelector(state => state)
 
-    //postUsersLeaderboard({username: 'Bob Dylan', time: '23m 45s'})
+    //postUsersLeaderboard({username: 'Bob Dylan', time: '123'})
+    //getTopTenUsersLeaderboard()
 
     return (
         <div className="App">
