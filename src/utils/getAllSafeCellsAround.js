@@ -1,27 +1,28 @@
 import getAroundCellsCords from "./getAroundCellsCords";
 
 const getAllSafeCellsAround = (x, y, field) => {
-    let arr = []
+    let cordsCellsToOpen = []
 
     const getCellsToOpen = (xInner, yInner) => {
         if (field[yInner][xInner].num !== 0) {
             return
         }
 
-        const cordsCellsAround = getAroundCellsCords(xInner, yInner, field.length)
-            .filter(cords => arr.findIndex(resCords => resCords.x === cords.x && resCords.y === cords.y) === -1)
+        const uniqueCordsCellsAround = getAroundCellsCords(xInner, yInner, field.length)
+            .filter(cords => cordsCellsToOpen
+                .findIndex(resCords => resCords.x === cords.x && resCords.y === cords.y) === -1)
 
-        arr.push(cordsCellsAround)
-        arr = arr.flat()
+        cordsCellsToOpen.push(uniqueCordsCellsAround)
+        cordsCellsToOpen = cordsCellsToOpen.flat()
 
-        if (cordsCellsAround.length) {
-            cordsCellsAround.map(cell => getCellsToOpen(cell.x, cell.y))
+        if (uniqueCordsCellsAround.length) {
+            uniqueCordsCellsAround.map(cell => getCellsToOpen(cell.x, cell.y))
         }
     }
 
     getCellsToOpen(x, y)
 
-    return arr
+    return cordsCellsToOpen
 }
 
 export default getAllSafeCellsAround;

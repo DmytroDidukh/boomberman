@@ -1,14 +1,16 @@
-import checkAroundCells from "./checkAroundCells";
+import checkCellToBombOrVoid from "./checkCellToBombOrVoid";
+import getAroundCellsCords from "./getAroundCellsCords";
 
 const fillFieldWithNumbers = (field) => {
     return field.map(parent => (
         parent.map(child => {
-
-                const cellsAround = checkAroundCells(field, child.id, 'bomb').filter(item => item)
+                const cellsWithBombsAround = getAroundCellsCords(child.id.x, child.id.y, field.length)
+                    .map(cords => checkCellToBombOrVoid(field, cords.y, cords.x, 'bomb'))
+                    .filter(item => item)
 
                 return {
                     ...child,
-                    num: cellsAround.length
+                    num: cellsWithBombsAround.length
                 }
             }
         )))

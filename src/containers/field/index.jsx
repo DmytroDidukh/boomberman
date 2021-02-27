@@ -7,25 +7,24 @@ import getAllSafeCellsAround from "../../utils/getAllSafeCellsAround";
 import {GAME_STATUS_DATA} from "../../config";
 import './styles.scss'
 
-
 const Field = ({setDialogOpen}) => {
     const {field, numberOfFlags, numberOfBombs, gameStatus} = useSelector(state => state)
     const dispatch = useDispatch()
 
-    const cellClickHandler = (e, id) => {
-        if (gameStatus === GAME_STATUS_DATA.review || field[id.y][id.x].flag) {
+    const cellClickHandler = (e, {x, y}) => {
+        if (gameStatus === GAME_STATUS_DATA.review || field[y][x].flag) {
             return
         }
 
-        if (field[id.y][id.x].num === 0 && !field[id.y][id.x].bomb) {
-            const safeCells = getAllSafeCellsAround(id.x, id.y, field, field.length)
+        if (field[y][x].num === 0 && !field[y][x].bomb) {
+            getAllSafeCellsAround(x, y, field, field.length)
                 .filter(cords => !field[cords.y][cords.x].bomb)
+                .forEach(({x, y}) => dispatch(openCell({x, y})))
 
-            safeCells.forEach(({x, y}) => dispatch(openCell({x, y})))
-        } else if (field[id.y][id.x].bomb) {
+        } else if (field[y][x].bomb) {
             field.forEach(parent => parent
                 .filter(child => child.bomb)
-                .forEach(({id: {x, y}}) => dispatch(openCell({x, y})))
+                .forEach(({id}) => dispatch(openCell(id)))
             )
 
             dispatch(changeGameStatus(GAME_STATUS_DATA.lost))
@@ -33,7 +32,7 @@ const Field = ({setDialogOpen}) => {
             return;
         }
 
-        dispatch(openCell(id))
+        dispatch(openCell({x, y}))
         const openedCellsLength = field
             .map(parent => parent.filter(child => child.click).length)
             .reduce((sum, num) => sum + num, 0)
