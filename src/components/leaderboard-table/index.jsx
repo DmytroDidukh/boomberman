@@ -26,10 +26,17 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-const LeaderboardTable = () => {
+const LeaderboardTable = ({data, index}) => {
+
+    const getReadableTime = (value) => {
+        const minutes = (value / 60).toFixed(0)
+        const seconds = value - minutes
+
+        return `${minutes}m ${seconds}s`
+    }
 
     return (
-        <TableContainer component={Paper} index={0}>
+        <TableContainer component={Paper} index={index}>
             <Table aria-label="customized table">
                 <TableHead>
                     <TableRow>
@@ -38,14 +45,16 @@ const LeaderboardTable = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-
-                    <StyledTableRow key={'row.name'}>
-                        <StyledTableCell component="th" scope="row">
-                            54
-                        </StyledTableCell>
-                        <StyledTableCell align="right">hhhh</StyledTableCell>
-                    </StyledTableRow>
-
+                    {
+                        data.map(player => (
+                            <StyledTableRow key={player.id}>
+                                <StyledTableCell component="th" scope="row">
+                                    {player.name}
+                                </StyledTableCell>
+                                <StyledTableCell align="right">{getReadableTime(player.time)}</StyledTableCell>
+                            </StyledTableRow>
+                        ))
+                    }
                 </TableBody>
             </Table>
         </TableContainer>

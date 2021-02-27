@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button, TextField} from "@material-ui/core";
 
 import StartMenuItem from "../../components/start-menu-item";
-import Leaderboard from "../../components/leaderboard";
+import Leaderboard from "../leaderboard";
 import {changeFieldSize, changeGameMode, changeGameStatus, setField, setPlayer} from "../../redux/actions";
 import fillFieldWithBombs from "../../utils/fillFieldWithBombs";
 import {FIELD_SIZE_DATA, GAME_MODE_DATA, GAME_STATUS_DATA} from "../../config";
@@ -12,7 +12,7 @@ import './styles.scss'
 const inputRegExpValidator = (value) => /^[a-zA-Z ]{2,30}$/.test(value)
 
 const StartMenu = () => {
-    const {field, numberOfBombs, gameMode} = useSelector((state) => state)
+    const {field, numberOfBombs, gameMode, player} = useSelector((state) => state)
     const dispatch = useDispatch()
 
     const [inputValue, setInputValue] = useState('')
@@ -29,7 +29,7 @@ const StartMenu = () => {
 
         dispatch(setField({field: updatedField, numberOfFieldItems: numberOfBombs}))
         dispatch(changeGameStatus(GAME_STATUS_DATA.playing))
-        dispatch(setPlayer({username: inputValue, time: 0, gameMode}))
+        dispatch(setPlayer({...player, username: inputValue, gameMode}))
     }
 
     const handleInputChange = (e) => {

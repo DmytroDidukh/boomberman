@@ -6,6 +6,7 @@ import {
     CHANGE_GAME_STATUS,
     SET_FIELD,
     SET_PLAYER,
+    SET_LEADERBOARD,
 } from "./types";
 
 export const openCell = (id) => ({
@@ -40,5 +41,10 @@ export const setField = (data) => ({
 
 export const setPlayer = (data) => ({
     type: SET_PLAYER,
+    payload: data
+})
+
+export const setLeaderboard = (data) => ({
+    type: SET_LEADERBOARD,
     payload: data
 })

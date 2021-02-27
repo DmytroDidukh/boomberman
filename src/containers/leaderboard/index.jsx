@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
+import {useSelector} from "react-redux";
 import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
-import LeaderboardTable from '../leaderboard-table'
+import LeaderboardTable from '../../components/leaderboard-table'
 import './styles.scss'
 
 const Leaderboard = () => {
+    const {leaderboard} = useSelector(state => state)
+
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -41,8 +44,8 @@ const Leaderboard = () => {
                 onChangeIndex={handleChangeIndex}
             >
                 {
-                    [0, 2, 4].map((_, i) => (
-                        <LeaderboardTable key={_} index={i}/>
+                    Object.values(leaderboard).map((data, i) => (
+                        <LeaderboardTable key={i} index={i} data={data}/>
                     ))
                 }
             </SwipeableViews>
