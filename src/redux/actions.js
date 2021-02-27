@@ -32,7 +32,7 @@ export const changeGameStatus = (status) => ({
     payload: status
 })
 
-export const setField = (updatedField) => ({
+export const setField = (data) => ({
     type: SET_FIELD,
-    payload: updatedField
+    payload: data
 })

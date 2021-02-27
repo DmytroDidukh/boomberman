@@ -24,7 +24,7 @@ const Playground = () => {
     const handleGoReplay = () => {
         setDialogOpen(false)
         dispatch(changeGameStatus(GAME_STATUS_DATA.preparing))
-        dispatch(setField(createField(10)))
+        dispatch(setField({field: createField(10), numberOfFieldItems: numberOfBombs}))
     }
 
     const handleReviewField = () => {
@@ -37,13 +37,13 @@ const Playground = () => {
         dispatch(changeGameStatus(dialogOpen ? GAME_STATUS_DATA.playing : GAME_STATUS_DATA.paused))
     }
 
-    const refreshField = () => {
+    const resetField = () => {
         setMinutes(0)
         setSeconds(0)
         dispatch(changeGameStatus(GAME_STATUS_DATA.playing))
 
         const updatedField = fillFieldWithBombs(createField(field.length), field.length, numberOfBombs)
-        dispatch(setField(updatedField))
+        dispatch(setField({field: updatedField, numberOfFieldItems: numberOfBombs}))
     }
 
     const getDialogTitle = () => {
@@ -62,7 +62,7 @@ const Playground = () => {
             <section className='playground-header'>
                 <div className='bombs-indicator'>Flags: {numberOfFlags}</div>
                 {gameStatus === GAME_STATUS_DATA.review &&
-                <IconButton className='refresh-button' onClick={refreshField}>
+                <IconButton className='refresh-button' onClick={resetField}>
                     <RefreshIcon/>
                 </IconButton>
                 }

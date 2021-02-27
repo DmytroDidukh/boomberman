@@ -1,4 +1,4 @@
-import getAroundCellsCords from "./getAroundCellsCords";
+import getCordsCellsAround from "./getCordsCellsAround";
 
 const getAllSafeCellsAround = (x, y, field) => {
     let cordsCellsToOpen = []
@@ -8,7 +8,7 @@ const getAllSafeCellsAround = (x, y, field) => {
             return
         }
 
-        const uniqueCordsCellsAround = getAroundCellsCords(xInner, yInner, field.length)
+        const uniqueCordsCellsAround = getCordsCellsAround(xInner, yInner, field.length)
             .filter(cords => cordsCellsToOpen
                 .findIndex(resCords => resCords.x === cords.x && resCords.y === cords.y) === -1)
 

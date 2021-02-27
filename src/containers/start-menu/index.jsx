@@ -18,7 +18,7 @@ const StartMenu = () => {
     const startGame = () => {
         const updatedField = fillFieldWithBombs(field, field.length, numberOfBombs)
 
-        dispatch(setField(updatedField))
+        dispatch(setField({field: updatedField, numberOfFieldItems: numberOfBombs}))
         dispatch(changeGameStatus(GAME_STATUS_DATA.playing))
     }
 

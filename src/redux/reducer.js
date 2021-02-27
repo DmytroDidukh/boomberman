@@ -52,31 +52,33 @@ export const rootReducer = (state = initialState, action) => {
         case CHANGE_FIELD_SIZE: {
             const {gameMode} = state
             const gameModePercentage = getPercentageOfFieldItems(gameMode)
-            const numberOfItems = action.payload * 10 * gameModePercentage
+            const numberOfFieldItems = action.payload * 10 * gameModePercentage
 
             return {
                 ...state,
                 field: createField(action.payload),
-                numberOfBombs: numberOfItems,
-                numberOfFlags: numberOfItems,
+                numberOfBombs: numberOfFieldItems,
+                numberOfFlags: numberOfFieldItems,
             }
         }
         case CHANGE_GAME_MODE: {
             const gameMode = action.payload
             const gameModePercentage = getPercentageOfFieldItems(gameMode)
-            const numberOfItems = state.field.length * 10 * gameModePercentage
+            const numberOfFieldItems = state.field.length * 10 * gameModePercentage
 
             return {
                 ...state,
                 gameMode: action.payload,
-                numberOfBombs: numberOfItems,
-                numberOfFlags: numberOfItems,
+                numberOfBombs: numberOfFieldItems,
+                numberOfFlags: numberOfFieldItems,
             }
         }
         case SET_FIELD: {
             return {
                 ...state,
-                field: action.payload
+                field: action.payload.field,
+                numberOfBombs: action.payload.numberOfFieldItems,
+                numberOfFlags: action.payload.numberOfFieldItems
             }
         }
         default: {
