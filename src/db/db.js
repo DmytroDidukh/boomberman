@@ -1,5 +1,4 @@
 import firebase from "firebase";
-
 require("firebase/firestore");
 
 const config = {
@@ -20,7 +19,7 @@ export const postUsersLeaderboard = (data) => {
         ...data
     })
         .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
+            console.log("Document written");
         })
         .catch((error) => {
             console.error("Error adding document: ", error);
