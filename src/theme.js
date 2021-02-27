@@ -98,6 +98,19 @@ const theme = createMuiTheme({
                 }
             }
         },
+        MuiTableCell: {
+            body: {
+                color: '#fff'
+            }
+        },
+        MuiTab: {
+            root: {
+                minWidth: 120,
+                '@media (min-width: 600px)': {
+                    minWidth: 120,
+                }
+            }
+        }
     }
 })
 

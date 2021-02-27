@@ -60,7 +60,10 @@ const Playground = () => {
     return (
         <main className='playground'>
             <section className='playground-header'>
-                <div className='bombs-indicator'>Flags: {numberOfFlags}</div>
+                <div className='bombs-indicator'>
+                    <span>Flags: {numberOfFlags}</span>
+                    <span>Bombs: {numberOfBombs}</span>
+                </div>
                 {gameStatus === GAME_STATUS_DATA.review &&
                 <IconButton className='refresh-button' onClick={resetField}>
                     <RefreshIcon/>

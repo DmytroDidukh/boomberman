@@ -28,8 +28,12 @@
     }
 
     .bombs-indicator, .timer {
+      display: flex;
+      flex-direction: column;
       color: orangered;
       padding: 5px;
+      justify-content: center;
+      text-align: left;
       @include boxShadows(#242424, #181818, #303030);
 
     }
@@ -47,7 +51,7 @@
 .refresh-button, .pause-button {
   position: absolute !important;
   left: 50%;
-  bottom: -20px;
+  bottom: -5px;
   transform: translateX(-50%);
   padding: 0 !important;
 }
