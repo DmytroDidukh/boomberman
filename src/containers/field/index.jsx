@@ -46,10 +46,9 @@ const Field = ({setDialogOpen, gameTime}) => {
 
             if (existedPlayer && existedPlayer.gameTime >= gameTime) {
                 updateExistedPlayer(existedPlayer.id, gameTime)
-            } else {
+            } else if (!existedPlayer) {
                 savePlayerToLeaderboard({...player, gameTime})
             }
-
         }
     }
 
