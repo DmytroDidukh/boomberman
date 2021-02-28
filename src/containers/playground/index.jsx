@@ -3,14 +3,15 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import {useDispatch, useSelector} from "react-redux";
 import IconButton from '@material-ui/core/IconButton';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
-
 import {Button} from "@material-ui/core";
+
 import Timer from "../../components/timer";
 import Field from "../field";
 import AlertDialog from "../../components/dialog";
-import {changeGameStatus, setField, setGameTime, setPlayer} from "../../redux/actions";
+import {changeGameStatus, resetGameTime, setField, setGameTime, setPlayer} from "../../redux/actions";
 import createField from "../../utils/createField";
 import fillFieldWithBombs from "../../utils/fillFieldWithBombs";
+import {getSecondsFromTimestamp, getReadableTime} from '../../utils/getReadableTime'
 import {GAME_STATUS_DATA} from "../../config";
 import './styles.scss'
 
@@ -26,12 +27,13 @@ const Playground = () => {
         setDialogOpen(false)
         dispatch(changeGameStatus(GAME_STATUS_DATA.preparing))
         dispatch(setField({field: createField(10), numberOfFieldItems: numberOfBombs}))
-        dispatch(setPlayer({...player, gameTime: minutes * 60 + seconds}))
+        dispatch(setPlayer({...player, gameTime: getSecondsFromTimestamp(gameTime)}))
+        dispatch(resetGameTime())
     }
 
     const handleReviewField = () => {
         dispatch(changeGameStatus(GAME_STATUS_DATA.review))
-        dispatch(setPlayer({...player, gameTime: minutes * 60 + seconds}))
+        dispatch(setPlayer({...player, gameTime: getSecondsFromTimestamp(gameTime)}))
         setDialogOpen(false)
     }
 
@@ -39,7 +41,7 @@ const Playground = () => {
         setDialogOpen(prev => !prev)
         dispatch(changeGameStatus(dialogOpen ? GAME_STATUS_DATA.playing : GAME_STATUS_DATA.paused))
 
-        const timestamp = gameTime.pauseEnd - gameTime.pauseStart
+        const timestamp = gameTime.pauseEnd && Date.now() - gameTime.pauseStart
         let keyVariableForPause = 'pauseStart';
         let pauseTimeWithPrevious = Date.now()
 
@@ -59,6 +61,8 @@ const Playground = () => {
         const updatedField = fillFieldWithBombs(createField(field.length), field.length, numberOfBombs)
         dispatch(setField({field: updatedField, numberOfFieldItems: numberOfBombs}))
         dispatch(setPlayer({...player, gameTime: 0}))
+        dispatch(resetGameTime())
+        dispatch(setGameTime({gameStart: Date.now()}))
         setDialogOpen(false)
     }
 
@@ -118,7 +122,7 @@ const Playground = () => {
                                  handlePlayAgain={handlePlayAgain}
                                  title={getDialogTitle()}
                                  userName={player.username}
-                                 gameTime={`${minutes < 10 ? '0' + minutes : minutes} min ${seconds < 10 ? '0' + seconds : seconds} sec`}
+                                 gameTime={getReadableTime(getSecondsFromTimestamp(gameTime))}
                     />
             }
         </main>
