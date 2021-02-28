@@ -17,7 +17,7 @@ export const initialState = {
     gameMode: 'easy',
     field: createField(10),
     player: {
-        username: null,
+        username: '',
         gameTime: 0,
         gameMode: 'easy',
     },
