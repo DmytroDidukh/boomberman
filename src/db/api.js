@@ -49,6 +49,6 @@ export const checkPlayerExist = async (username, gameMode) => {
 export const updateExistedPlayer = (id, gameTime) => {
     db.collection("leaderboard")
         .doc(id)
-        .update({gameTime})
+        .update({gameTime: gameTime})
         .catch((e) => console.error(e))
 }

@@ -23,7 +23,7 @@ const StartMenu = () => {
     const {field, numberOfBombs, gameMode, player} = useSelector((state) => state)
     const dispatch = useDispatch()
 
-    const [inputValue, setInputValue] = useState('')
+    const [inputValue, setInputValue] = useState(player.username)
     const [shouldValidate, setShouldValidate] = useState(false)
 
     useEffect(() => {

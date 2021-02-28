@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import IconButton from '@material-ui/core/IconButton';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 
+import {Button} from "@material-ui/core";
 import Timer from "../../components/timer";
 import Field from "../field";
 import AlertDialog from "../../components/dialog";
@@ -87,6 +88,13 @@ const Playground = () => {
                 }
             </section>
             <Field setDialogOpen={setDialogOpen} gameTime={minutes * 60 + seconds}/>
+            <Button variant="contained"
+                    color="primary"
+                    className='back-menu-button'
+                    onClick={handleGoReplay}
+            >
+                BACK TO MENU
+            </Button>
             {
                 gameStatus === GAME_STATUS_DATA.playing ?
                     null :
