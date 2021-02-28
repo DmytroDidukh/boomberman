@@ -12,6 +12,8 @@ const Field = ({setDialogOpen}) => {
     const {field, numberOfFlags, numberOfBombs, gameStatus, player, gameTime} = useSelector(state => state)
     const dispatch = useDispatch()
 
+    const startGameTime = useRef(Date.now())
+
     const cellClickHandler = async (e, {x, y}) => {
         if (gameStatus === GAME_STATUS_DATA.review || field[y][x].flag) {
             return
