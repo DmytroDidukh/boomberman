@@ -100,6 +100,9 @@ const theme = createMuiTheme({
             },
             head: {
                 color: '#ff4500',
+            },
+            root: {
+                padding: 5
             }
         },
         MuiTab: {
