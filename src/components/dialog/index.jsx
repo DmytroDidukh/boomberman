@@ -12,7 +12,6 @@ const AlertDialog = ({
                          open,
                          gameStatus,
                          handleGoReplay,
-                         /*handleGoLeaderboard,*/
                          handleReviewField,
                          handlePauseGame,
                          title,
@@ -42,10 +41,6 @@ const AlertDialog = ({
                     </Button>
                     :
                     <>
-                        {/*<Button className='dialog-button' onClick={handleGoLeaderboard} color="primary"*/}
-                        {/*        variant="outlined">*/}
-                        {/*    Leaderboard*/}
-                        {/*</Button>*/}
                         <Button className='dialog-button' onClick={handleReviewField} color="primary" autoFocus
                                 variant="outlined">
                             Review field

@@ -7,11 +7,6 @@ const theme = createMuiTheme({
             'cursive',
             'system-ui',
             '-apple-system',
-            'BlinkMacSystemFont',
-            'Segoe UI',
-            'Roboto',
-            'Ubuntu',
-            'Helvetica Neue',
             'sans-serif',
         ],
     },
@@ -98,6 +93,23 @@ const theme = createMuiTheme({
                 }
             }
         },
+        MuiTableCell: {
+            body: {
+                color: '#fff',
+                fontSize: '12px'
+            },
+            head: {
+                color: '#ff4500',
+            }
+        },
+        MuiTab: {
+            root: {
+                minWidth: 120,
+                '@media (min-width: 600px)': {
+                    minWidth: 120,
+                }
+            }
+        }
     }
 })
 

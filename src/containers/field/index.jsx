@@ -4,14 +4,15 @@ import {useDispatch, useSelector} from "react-redux";
 import Cell from "../../components/cell";
 import {changeGameStatus, openCell, setFlag} from "../../redux/actions";
 import getAllSafeCellsAround from "../../utils/getAllSafeCellsAround";
+import {checkPlayerExist, updateExistedPlayer, savePlayerToLeaderboard} from "../../db/api";
 import {GAME_STATUS_DATA} from "../../config";
 import './styles.scss'
 
-const Field = ({setDialogOpen}) => {
-    const {field, numberOfFlags, numberOfBombs, gameStatus} = useSelector(state => state)
+const Field = ({setDialogOpen, gameTime}) => {
+    const {field, numberOfFlags, numberOfBombs, gameStatus, player} = useSelector(state => state)
     const dispatch = useDispatch()
 
-    const cellClickHandler = (e, {x, y}) => {
+    const cellClickHandler = async (e, {x, y}) => {
         if (gameStatus === GAME_STATUS_DATA.review || field[y][x].flag) {
             return
         }
@@ -40,6 +41,18 @@ const Field = ({setDialogOpen}) => {
         if (field.length * 10 === openedCellsLength + numberOfBombs) {
             dispatch(changeGameStatus(GAME_STATUS_DATA.won))
             setDialogOpen(true)
+
+            const existedPlayer = await checkPlayerExist(player.username, player.gameMode)
+
+            console.log(existedPlayer)
+
+            if (existedPlayer && existedPlayer.gameTime > gameTime) {
+                console.log('inside')
+                updateExistedPlayer(existedPlayer.id, gameTime)
+            } else {
+                savePlayerToLeaderboard({...player, gameTime})
+            }
+
         }
     }
 
@@ -55,7 +68,7 @@ const Field = ({setDialogOpen}) => {
     }
 
     return (
-        <section className='field'>
+        <section className={`field ${gameStatus === GAME_STATUS_DATA.paused && 'field_hide'}`}>
             {
                 field.map((wrapper, index) => (
                     <div key={index} className='field-row'>

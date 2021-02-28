@@ -5,6 +5,8 @@ import {
     CHANGE_GAME_MODE,
     CHANGE_GAME_STATUS,
     SET_FIELD,
+    SET_PLAYER,
+    SET_LEADERBOARD,
 } from "./types";
 
 export const openCell = (id) => ({
@@ -34,5 +36,15 @@ export const changeGameStatus = (status) => ({
 
 export const setField = (data) => ({
     type: SET_FIELD,
+    payload: data
+})
+
+export const setPlayer = (data) => ({
+    type: SET_PLAYER,
+    payload: data
+})
+
+export const setLeaderboard = (data) => ({
+    type: SET_LEADERBOARD,
     payload: data
 })

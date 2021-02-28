@@ -1,4 +1,5 @@
 import firebase from "firebase";
+
 require("firebase/firestore");
 
 const config = {
@@ -14,28 +15,4 @@ const config = {
 firebase.initializeApp(config);
 const db = firebase.firestore();
 
-export const postUsersLeaderboard = (data) => {
-    db.collection("leaderboard").add({
-        ...data
-    })
-        .then((docRef) => {
-            console.log("Document written");
-        })
-        .catch((error) => {
-            console.error("Error adding document: ", error);
-        });
-}
-
-export const getTopTenUsersLeaderboard = async () => {
-    const leaderboardData = []
-
-    const response = await db
-        .collection("leaderboard")
-        .orderBy('time', "asc")
-        .limit(10)
-        .get()
-
-
-    response.docs.forEach(doc => leaderboardData.push(doc.data()))
-    console.log(leaderboardData)
-}
+export default db
