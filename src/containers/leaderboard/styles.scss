@@ -1,4 +1,7 @@
 .leaderboard {
   width: 400px;
+  @media (max-width: 1000px) {
+    margin-top: 50px !important;
+  }
 }
 

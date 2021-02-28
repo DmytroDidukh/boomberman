@@ -7,6 +7,11 @@
   & > * {
     margin: 0 50px;
   }
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    margin-top: 0;
+  }
 }
 
 .username-input {
@@ -25,8 +30,4 @@
   & > * {
     margin: 10px;
   }
-}
-
-.game-options {
-
 }
