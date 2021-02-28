@@ -14,7 +14,8 @@ const config = {
 firebase.initializeApp(config);
 const db = firebase.firestore();
 
-export const postUsersLeaderboard = (data) => {
+export const postPLayerToLeaderboard = (data) => {
+
     db.collection("leaderboard").add({
         ...data
     })
@@ -26,16 +27,48 @@ export const postUsersLeaderboard = (data) => {
         });
 }
 
-export const getTopTenUsersLeaderboard = async () => {
+export const getTopTenPlayersLeaderboard = async (gameMode) => {
     const leaderboardData = []
 
     const response = await db
         .collection("leaderboard")
         .orderBy('time', "asc")
         .limit(10)
+        .where('gameMode', '==', gameMode)
         .get()
 
-
     response.docs.forEach(doc => leaderboardData.push(doc.data()))
+    return leaderboardData
+}
+
+export const checkPlayerExist = async (username, gameMode) => {
+    const leaderboardData = []
+
+    const response = await db
+        .collection("leaderboard")
+        .where('username', '==', username)
+        .where('gameMode', '==', gameMode)
+        .get()
+
+    if (!response.empty) {
+        const snapshot = response.docs[0];
+        const data = snapshot.data();
+        data.id = snapshot.id
+        console.log(data)
+    } else {
+        console.log('not found')
+    }
+
+    //response.docs.forEach(doc => leaderboardData.push(doc.data()))
     console.log(leaderboardData)
 }
+
+export const updateExistedPlayer = (id, time) => {
+    db.collection("leaderboard")
+        .doc(id)
+        .update(time)
+        .then(() => console.log('Updated'))
+        .catch((e) => console.error(e))
+}
+
+
