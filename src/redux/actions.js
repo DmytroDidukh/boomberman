@@ -7,6 +7,8 @@ import {
     SET_FIELD,
     SET_PLAYER,
     SET_LEADERBOARD,
+    SET_GAME_TIME,
+    RESET_GAME_TIME,
 } from "./types";
 
 export const openCell = (id) => ({
@@ -47,4 +49,13 @@ export const setPlayer = (data) => ({
 export const setLeaderboard = (data) => ({
     type: SET_LEADERBOARD,
     payload: data
+})
+
+export const setGameTime = (data) => ({
+    type: SET_GAME_TIME,
+    payload: data
+})
+
+export const resetGameTime = () => ({
+    type: RESET_GAME_TIME
 })

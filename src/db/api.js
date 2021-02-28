@@ -3,9 +3,7 @@ import db from "./db";
 export const savePlayerToLeaderboard = (data) => {
     db.collection("leaderboard")
         .add(data)
-        .catch((error) => {
-            console.error("Error adding document: ", error);
-        });
+        .catch((error) => console.error("Error adding document: ", error));
 }
 
 export const getTopTenPlayers = async (gameMode) => {

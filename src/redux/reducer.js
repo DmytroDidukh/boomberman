@@ -5,7 +5,10 @@ import {
     CHANGE_GAME_MODE,
     SET_FIELD,
     CHANGE_GAME_STATUS,
-    SET_PLAYER, SET_LEADERBOARD,
+    SET_PLAYER,
+    SET_LEADERBOARD,
+    SET_GAME_TIME,
+    RESET_GAME_TIME,
 } from "./types";
 import createField from "../utils/createField";
 import getPercentageOfFieldItems from "../utils/getPercentageOfFieldItems";
@@ -18,13 +21,18 @@ export const initialState = {
     field: createField(10),
     player: {
         username: '',
-        gameTime: 0,
         gameMode: 'easy',
     },
     leaderboard: {
         easy: [],
         normal: [],
         hard: [],
+    },
+    gameTime: {
+        gameStart: 0,
+        gameEnd: 0,
+        pauseStart: 0,
+        pauseEnd: 0,
     }
 }
 
@@ -104,6 +112,23 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 leaderboard: action.payload
+            }
+        }
+        case SET_GAME_TIME: {
+            return {
+                ...state,
+                gameTime: {
+                    ...state.gameTime,
+                    ...action.payload
+                }
+            }
+        }
+        case RESET_GAME_TIME: {
+            return {
+                ...state,
+                gameTime: {
+                    ...initialState.gameTime
+                }
             }
         }
         default: {
