@@ -44,7 +44,7 @@ const Field = ({setDialogOpen, gameTime}) => {
 
             const existedPlayer = await checkPlayerExist(player.username, player.gameMode)
 
-            if (existedPlayer && existedPlayer.gameTime > gameTime) {
+            if (existedPlayer && existedPlayer.gameTime >= gameTime) {
                 updateExistedPlayer(existedPlayer.id, gameTime)
             } else {
                 savePlayerToLeaderboard({...player, gameTime})
