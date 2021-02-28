@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import Cell from "../../components/cell";
@@ -8,8 +8,8 @@ import {checkPlayerExist, updateExistedPlayer, savePlayerToLeaderboard} from "..
 import {GAME_STATUS_DATA} from "../../config";
 import './styles.scss'
 
-const Field = ({setDialogOpen, gameTime}) => {
-    const {field, numberOfFlags, numberOfBombs, gameStatus, player} = useSelector(state => state)
+const Field = ({setDialogOpen}) => {
+    const {field, numberOfFlags, numberOfBombs, gameStatus, player, gameTime} = useSelector(state => state)
     const dispatch = useDispatch()
 
     const cellClickHandler = async (e, {x, y}) => {
@@ -43,6 +43,8 @@ const Field = ({setDialogOpen, gameTime}) => {
             setDialogOpen(true)
 
             const existedPlayer = await checkPlayerExist(player.username, player.gameMode)
+            const gameTime = (Date.now() - startGameTime.current) / 1000
+            console.log(gameTime)
 
             if (existedPlayer && existedPlayer.gameTime >= gameTime) {
                 updateExistedPlayer(existedPlayer.id, gameTime)

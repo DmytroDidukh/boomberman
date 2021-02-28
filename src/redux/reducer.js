@@ -5,13 +5,15 @@ import {
     CHANGE_GAME_MODE,
     SET_FIELD,
     CHANGE_GAME_STATUS,
-    SET_PLAYER, SET_LEADERBOARD,
+    SET_PLAYER,
+    SET_LEADERBOARD,
+    SET_GAME_TIME,
 } from "./types";
 import createField from "../utils/createField";
 import getPercentageOfFieldItems from "../utils/getPercentageOfFieldItems";
 
 export const initialState = {
-    numberOfBombs: 10,
+    numberOfBombs: 1,
     numberOfFlags: 10,
     gameStatus: 'preparing',
     gameMode: 'easy',
@@ -25,6 +27,12 @@ export const initialState = {
         easy: [],
         normal: [],
         hard: [],
+    },
+    gameTime: {
+        gameStart: 0,
+        gameEnd: 0,
+        pauseStart: 0,
+        pauseEnd: 0,
     }
 }
 
@@ -88,7 +96,7 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 field: action.payload.field,
-                numberOfBombs: action.payload.numberOfFieldItems,
+                //numberOfBombs: action.payload.numberOfFieldItems,
                 numberOfFlags: action.payload.numberOfFieldItems
             }
         }
@@ -104,6 +112,15 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 leaderboard: action.payload
+            }
+        }
+        case SET_GAME_TIME: {
+            return {
+                ...state,
+                gameTime: {
+                    ...state.gameTime,
+                    ...action.payload
+                }
             }
         }
         default: {

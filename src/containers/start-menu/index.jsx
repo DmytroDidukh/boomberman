@@ -8,7 +8,7 @@ import {
     changeFieldSize,
     changeGameMode,
     changeGameStatus,
-    setField,
+    setField, setGameTime,
     setLeaderboard,
     setPlayer
 } from "../../redux/actions";
@@ -51,6 +51,7 @@ const StartMenu = () => {
         dispatch(setField({field: updatedField, numberOfFieldItems: numberOfBombs}))
         dispatch(changeGameStatus(GAME_STATUS_DATA.playing))
         dispatch(setPlayer({...player, username: inputValue, gameMode}))
+        dispatch(setGameTime({gameStart: Date.now()}))
     }
 
     const handleInputChange = (e) => {

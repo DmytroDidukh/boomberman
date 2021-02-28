@@ -8,14 +8,14 @@ import {Button} from "@material-ui/core";
 import Timer from "../../components/timer";
 import Field from "../field";
 import AlertDialog from "../../components/dialog";
-import {changeGameStatus, setField, setPlayer} from "../../redux/actions";
+import {changeGameStatus, setField, setGameTime, setPlayer} from "../../redux/actions";
 import createField from "../../utils/createField";
 import fillFieldWithBombs from "../../utils/fillFieldWithBombs";
 import {GAME_STATUS_DATA} from "../../config";
 import './styles.scss'
 
 const Playground = () => {
-    const {numberOfFlags, gameStatus, field, numberOfBombs, player} = useSelector((state) => state)
+    const {numberOfFlags, gameStatus, field, numberOfBombs, player, gameTime} = useSelector((state) => state)
     const dispatch = useDispatch()
 
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -38,6 +38,17 @@ const Playground = () => {
     const handlePauseGame = () => {
         setDialogOpen(prev => !prev)
         dispatch(changeGameStatus(dialogOpen ? GAME_STATUS_DATA.playing : GAME_STATUS_DATA.paused))
+
+        const timestamp = gameTime.pauseEnd - gameTime.pauseStart
+        let keyVariableForPause = 'pauseStart';
+        let pauseTimeWithPrevious = Date.now()
+
+        if (dialogOpen) {
+            keyVariableForPause = 'pauseEnd'
+            pauseTimeWithPrevious += timestamp
+        }
+
+        dispatch(setGameTime({[keyVariableForPause]: pauseTimeWithPrevious}))
     }
 
     const handlePlayAgain = () => {
