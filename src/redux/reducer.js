@@ -11,7 +11,7 @@ import createField from "../utils/createField";
 import getPercentageOfFieldItems from "../utils/getPercentageOfFieldItems";
 
 export const initialState = {
-    numberOfBombs: 1,
+    numberOfBombs: 10,
     numberOfFlags: 10,
     gameStatus: 'preparing',
     gameMode: 'easy',
@@ -88,7 +88,7 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 field: action.payload.field,
-                //numberOfBombs: action.payload.numberOfFieldItems,
+                numberOfBombs: action.payload.numberOfFieldItems,
                 numberOfFlags: action.payload.numberOfFieldItems
             }
         }
