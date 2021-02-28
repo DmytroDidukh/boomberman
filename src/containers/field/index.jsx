@@ -65,7 +65,7 @@ const Field = ({setDialogOpen, gameTime}) => {
     }
 
     return (
-        <section className={`field ${gameStatus === GAME_STATUS_DATA.paused && 'field_hide'}`}>
+        <section className={`field ${gameStatus === GAME_STATUS_DATA.paused && 'hide'}`}>
             {
                 field.map((wrapper, index) => (
                     <div key={index} className='field-row'>

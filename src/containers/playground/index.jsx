@@ -22,16 +22,16 @@ const Playground = () => {
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
 
-    const handleGoReplay = () => {
+    const handleGoMenu = () => {
         setDialogOpen(false)
         dispatch(changeGameStatus(GAME_STATUS_DATA.preparing))
         dispatch(setField({field: createField(10), numberOfFieldItems: numberOfBombs}))
-        dispatch(setPlayer({...player, time: minutes * 60 + seconds}))
+        dispatch(setPlayer({...player, gameTime: minutes * 60 + seconds}))
     }
 
     const handleReviewField = () => {
         dispatch(changeGameStatus(GAME_STATUS_DATA.review))
-        dispatch(setPlayer({...player, time: minutes * 60 + seconds}))
+        dispatch(setPlayer({...player, gameTime: minutes * 60 + seconds}))
         setDialogOpen(false)
     }
 
@@ -40,14 +40,15 @@ const Playground = () => {
         dispatch(changeGameStatus(dialogOpen ? GAME_STATUS_DATA.playing : GAME_STATUS_DATA.paused))
     }
 
-    const resetField = () => {
+    const handlePlayAgain = () => {
         setMinutes(0)
         setSeconds(0)
         dispatch(changeGameStatus(GAME_STATUS_DATA.playing))
 
         const updatedField = fillFieldWithBombs(createField(field.length), field.length, numberOfBombs)
         dispatch(setField({field: updatedField, numberOfFieldItems: numberOfBombs}))
-        dispatch(setPlayer({...player, time: 0}))
+        dispatch(setPlayer({...player, gameTime: 0}))
+        setDialogOpen(false)
     }
 
     const getDialogTitle = () => {
@@ -69,7 +70,7 @@ const Playground = () => {
                     <span>Bombs: {numberOfBombs}</span>
                 </div>
                 {gameStatus === GAME_STATUS_DATA.review &&
-                <IconButton className='refresh-button' onClick={resetField}>
+                <IconButton className='refresh-button' onClick={handlePlayAgain}>
                     <RefreshIcon/>
                 </IconButton>
                 }
@@ -90,8 +91,8 @@ const Playground = () => {
             <Field setDialogOpen={setDialogOpen} gameTime={minutes * 60 + seconds}/>
             <Button variant="contained"
                     color="primary"
-                    className='back-menu-button'
-                    onClick={handleGoReplay}
+                    className={`back-menu-button ${gameStatus === GAME_STATUS_DATA.paused && 'hide'}`}
+                    onClick={handleGoMenu}
             >
                 BACK TO MENU
             </Button>
@@ -100,12 +101,13 @@ const Playground = () => {
                     null :
                     <AlertDialog open={dialogOpen}
                                  gameStatus={gameStatus}
-                                 handleGoReplay={handleGoReplay}
+                                 handleGoMenu={handleGoMenu}
                                  handleReviewField={handleReviewField}
                                  handlePauseGame={handlePauseGame}
+                                 handlePlayAgain={handlePlayAgain}
                                  title={getDialogTitle()}
                                  userName={player.username}
-                                 time={`${minutes < 10 ? '0' + minutes : minutes} min ${seconds < 10 ? '0' + seconds : seconds} sec`}
+                                 gameTime={`${minutes < 10 ? '0' + minutes : minutes} min ${seconds < 10 ? '0' + seconds : seconds} sec`}
                     />
             }
         </main>

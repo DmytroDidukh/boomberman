@@ -11,12 +11,13 @@ import {GAME_STATUS_DATA} from "../../config";
 const AlertDialog = ({
                          open,
                          gameStatus,
-                         handleGoReplay,
+                         handleGoMenu,
                          handleReviewField,
                          handlePauseGame,
+                         handlePlayAgain,
                          title,
                          userName,
-                         time
+                         gameTime
                      }) => (
     <Dialog
         open={open}
@@ -28,7 +29,7 @@ const AlertDialog = ({
             gameStatus !== GAME_STATUS_DATA.paused && <DialogContent>
                 <DialogContentText className='dialog-body' id="alert-dialog-description">
                     User: {userName} <br/>
-                    Time: {time}
+                    Time: {gameTime}
                 </DialogContentText>
             </DialogContent>
         }
@@ -41,11 +42,15 @@ const AlertDialog = ({
                     </Button>
                     :
                     <>
+                        <Button className='dialog-button' onClick={handleGoMenu} color="primary" autoFocus
+                                variant="outlined">
+                            Back to menu
+                        </Button>
                         <Button className='dialog-button' onClick={handleReviewField} color="primary" autoFocus
                                 variant="outlined">
                             Review field
                         </Button>
-                        <Button className='dialog-button' onClick={handleGoReplay} color="primary" autoFocus
+                        <Button className='dialog-button' onClick={handlePlayAgain} color="primary" autoFocus
                                 variant="contained">
                             Play again
                         </Button>

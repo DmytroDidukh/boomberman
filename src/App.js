@@ -4,15 +4,9 @@ import Playground from "./containers/playground";
 import StartMenu from "./containers/start-menu";
 
 import './App.scss';
-//import {getTopTenPlayersLeaderboard, postPLayerToLeaderboard, checkPlayerExist, updateExistedPlayer} from "./db/db";
 
 function App() {
     const {gameMode, gameStatus} = useSelector(state => state)
-
-    //postPLayerToLeaderboard()
-    //getTopTenPlayersLeaderboard()
-    //checkPlayerExist('Jimmy Handrix', 'hard')
-    //updateExistedPlayer()
 
     return (
         <div className="App">
