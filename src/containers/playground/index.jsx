@@ -46,6 +46,7 @@ const Playground = () => {
 
         const updatedField = fillFieldWithBombs(createField(field.length), field.length, numberOfBombs)
         dispatch(setField({field: updatedField, numberOfFieldItems: numberOfBombs}))
+        dispatch(setPlayer({...player, time: 0}))
     }
 
     const getDialogTitle = () => {
@@ -85,7 +86,7 @@ const Playground = () => {
                     </>
                 }
             </section>
-            <Field setDialogOpen={setDialogOpen}/>
+            <Field setDialogOpen={setDialogOpen} gameTime={minutes * 60 + seconds}/>
             {
                 gameStatus === GAME_STATUS_DATA.playing ?
                     null :

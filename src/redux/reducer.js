@@ -18,9 +18,8 @@ export const initialState = {
     field: createField(10),
     player: {
         username: null,
-        time: 0,
+        gameTime: 0,
         gameMode: 'easy',
-        id: null
     },
     leaderboard: {
         easy: [],
@@ -104,9 +103,7 @@ export const rootReducer = (state = initialState, action) => {
         case SET_LEADERBOARD: {
             return {
                 ...state,
-                leaderboard: {
-                    [action.payload.key]: action.payload.data
-                }
+                leaderboard: action.payload
             }
         }
         default: {

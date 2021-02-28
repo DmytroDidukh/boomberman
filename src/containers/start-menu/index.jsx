@@ -1,10 +1,18 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button, TextField} from "@material-ui/core";
 
 import StartMenuItem from "../../components/start-menu-item";
 import Leaderboard from "../leaderboard";
-import {changeFieldSize, changeGameMode, changeGameStatus, setField, setPlayer} from "../../redux/actions";
+import {
+    changeFieldSize,
+    changeGameMode,
+    changeGameStatus,
+    setField,
+    setLeaderboard,
+    setPlayer
+} from "../../redux/actions";
+import {getTopTenPlayers} from '../../db/api'
 import fillFieldWithBombs from "../../utils/fillFieldWithBombs";
 import {FIELD_SIZE_DATA, GAME_MODE_DATA, GAME_STATUS_DATA} from "../../config";
 import './styles.scss'
@@ -18,8 +26,21 @@ const StartMenu = () => {
     const [inputValue, setInputValue] = useState('')
     const [shouldValidate, setShouldValidate] = useState(false)
 
-    const startGame = () => {
+    useEffect(() => {
+        (async () => {
+            const [easy, normal, hard] = await Promise.all([
+                getTopTenPlayers('easy'),
+                getTopTenPlayers('normal'),
+                getTopTenPlayers('hard')
+            ])
 
+            return {easy, normal, hard}
+        })()
+            .then(data => dispatch(setLeaderboard(data)))
+            .catch(e => console.error(e))
+    }, [])
+
+    const startGame = () => {
         if (!inputRegExpValidator(inputValue)) {
             setShouldValidate(true)
             return

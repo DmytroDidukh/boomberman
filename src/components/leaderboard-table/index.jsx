@@ -1,38 +1,23 @@
 import React from "react";
-import {withStyles} from '@material-ui/core/styles';
-import TableContainer from "@material-ui/core/TableContainer";
-import Paper from "@material-ui/core/Paper";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import Table from "@material-ui/core/Table";
+import {
+    TableContainer,
+    Paper,
+    TableHead,
+    TableRow,
+    TableBody,
+    TableCell,
+    Table,
+} from '@material-ui/core'
 
-const StyledTableCell = withStyles((theme) => ({
-    head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    body: {
-        fontSize: 12,
-    },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-    root: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
-        },
-    },
-}))(TableRow);
 
 const LeaderboardTable = ({data, index}) => {
 
-    const getReadableTime = (value) => {
-        const minutes = (value / 60).toFixed(0)
-        const seconds = value - minutes
+    const getReadableTime = (timestamp) => {
+        const hours = Math.floor(timestamp / 60 / 60);
+        const minutes = Math.floor(timestamp / 60) - (hours * 60);
+        const seconds = timestamp % 60;
 
-        return `${minutes}m ${seconds}s`
+        return `${hours ? hours + 'h' : ''} ${minutes ? minutes + 'm' : ''} ${seconds}s`
     }
 
     return (
@@ -40,19 +25,19 @@ const LeaderboardTable = ({data, index}) => {
             <Table aria-label="customized table">
                 <TableHead>
                     <TableRow>
-                        <StyledTableCell>Username</StyledTableCell>
-                        <StyledTableCell align="right">Time</StyledTableCell>
+                        <TableCell>Username</TableCell>
+                        <TableCell align="right">Time</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {
                         data.map(player => (
-                            <StyledTableRow key={player.id}>
-                                <StyledTableCell component="th" scope="row">
-                                    {player.name}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">{getReadableTime(player.time)}</StyledTableCell>
-                            </StyledTableRow>
+                            <TableRow key={player.username}>
+                                <TableCell component="th" scope="row">
+                                    {player.username}
+                                </TableCell>
+                                <TableCell align="right">{getReadableTime(player.gameTime)}</TableCell>
+                            </TableRow>
                         ))
                     }
                 </TableBody>

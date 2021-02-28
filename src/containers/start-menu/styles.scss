@@ -1,7 +1,6 @@
 .start-menu {
   display: flex;
   flex-direction: row-reverse;
-  align-items: center;
   justify-content: space-evenly;
   margin-top: 50px;
 
@@ -11,7 +10,7 @@
 }
 
 .username-input {
-  margin: 20px 0 !important;
+  margin: 20px 0 !important
 }
 
 .start-button {
