@@ -17,7 +17,7 @@ import fillFieldWithBombs from "../../utils/fillFieldWithBombs";
 import {FIELD_SIZE_DATA, GAME_MODE_DATA, GAME_STATUS_DATA} from "../../config";
 import './styles.scss'
 
-const inputRegExpValidator = (value) => /^[a-zA-Z ]{2,30}$/.test(value)
+const inputRegExpValidator = (value) => /^[a-zA-Z\s]{2,30}$/.test(value)
 
 const StartMenu = () => {
     const {field, numberOfBombs, gameMode, player} = useSelector((state) => state)
@@ -55,7 +55,7 @@ const StartMenu = () => {
     }
 
     const handleInputChange = (e) => {
-        const value = e.target.value.trim();
+        const value = e.target.value;
         setInputValue(value)
 
         if (inputRegExpValidator(value)) {

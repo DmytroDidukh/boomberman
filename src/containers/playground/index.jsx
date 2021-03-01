@@ -8,7 +8,7 @@ import {Button} from "@material-ui/core";
 import Timer from "../../components/timer";
 import Field from "../field";
 import AlertDialog from "../../components/dialog";
-import {changeGameStatus, resetGameTime, setField, setGameTime, setPlayer} from "../../redux/actions";
+import {changeGameStatus, resetGameTime, setField, setGameTime} from "../../redux/actions";
 import createField from "../../utils/createField";
 import fillFieldWithBombs from "../../utils/fillFieldWithBombs";
 import {getSecondsFromTimestamp, getReadableTime} from '../../utils/getReadableTime'
@@ -20,20 +20,17 @@ const Playground = () => {
     const dispatch = useDispatch()
 
     const [dialogOpen, setDialogOpen] = useState(false);
-    const [minutes, setMinutes] = useState(0);
-    const [seconds, setSeconds] = useState(0);
+    const [timeCounter, setTimeCounter] = useState(0);
 
     const handleGoMenu = () => {
         setDialogOpen(false)
         dispatch(changeGameStatus(GAME_STATUS_DATA.preparing))
         dispatch(setField({field: createField(10), numberOfFieldItems: numberOfBombs}))
-        dispatch(setPlayer({...player, gameTime: getSecondsFromTimestamp(gameTime)}))
         dispatch(resetGameTime())
     }
 
     const handleReviewField = () => {
         dispatch(changeGameStatus(GAME_STATUS_DATA.review))
-        dispatch(setPlayer({...player, gameTime: getSecondsFromTimestamp(gameTime)}))
         setDialogOpen(false)
     }
 
@@ -41,26 +38,24 @@ const Playground = () => {
         setDialogOpen(prev => !prev)
         dispatch(changeGameStatus(dialogOpen ? GAME_STATUS_DATA.playing : GAME_STATUS_DATA.paused))
 
-        const timestamp = gameTime.pauseEnd && Date.now() - gameTime.pauseStart
+        //Calculating pause time
         let keyVariableForPause = 'pauseStart';
-        let pauseTimeWithPrevious = Date.now()
+        let pauseTimeWithPreviousOrNot = Date.now()
 
         if (dialogOpen) {
             keyVariableForPause = 'pauseEnd'
-            pauseTimeWithPrevious += timestamp
+            pauseTimeWithPreviousOrNot += gameTime.pauseEnd && Date.now() - gameTime.pauseStart
         }
 
-        dispatch(setGameTime({[keyVariableForPause]: pauseTimeWithPrevious}))
+        dispatch(setGameTime({[keyVariableForPause]: pauseTimeWithPreviousOrNot}))
     }
 
     const handlePlayAgain = () => {
-        setMinutes(0)
-        setSeconds(0)
+        setTimeCounter(0)
         dispatch(changeGameStatus(GAME_STATUS_DATA.playing))
 
         const updatedField = fillFieldWithBombs(createField(field.length), field.length, numberOfBombs)
         dispatch(setField({field: updatedField, numberOfFieldItems: numberOfBombs}))
-        dispatch(setPlayer({...player, gameTime: 0}))
         dispatch(resetGameTime())
         dispatch(setGameTime({gameStart: Date.now()}))
         setDialogOpen(false)
@@ -96,14 +91,12 @@ const Playground = () => {
                             <PauseCircleOutlineIcon/>
                         </IconButton>
                         <Timer
-                            minutes={minutes}
-                            seconds={seconds}
-                            setMinutes={setMinutes}
-                            setSeconds={setSeconds}/>
+                            timeCounter={timeCounter}
+                            setTimeCounter={setTimeCounter}/>
                     </>
                 }
             </section>
-            <Field setDialogOpen={setDialogOpen} gameTime={minutes * 60 + seconds}/>
+            <Field setDialogOpen={setDialogOpen} timeCounter={timeCounter}/>
             <Button variant="contained"
                     color="primary"
                     className={`back-menu-button ${gameStatus === GAME_STATUS_DATA.paused && 'hide'}`}

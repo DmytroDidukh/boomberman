@@ -1,27 +1,25 @@
 import React, {useEffect} from "react";
 
-const Timer = ({seconds, minutes, setMinutes, setSeconds}) => {
+const Timer = ({timeCounter, setTimeCounter}) => {
+
+    const counterFormat = (timeCounter) => {
+        let min = Math.floor(timeCounter / 60);
+        let sec = timeCounter % 60;
+
+        return `${min < 10 ? `0${min}` : min}:${sec < 10 ? `0${sec}` : sec}`
+    }
 
     useEffect(() => {
         let myInterval = setInterval(() => {
-            if (seconds === 59) {
-                setSeconds(0);
-                setMinutes(minutes + 1)
-            } else {
-                setSeconds(seconds + 1);
-            }
-
-        }, 1000)
+            setTimeCounter(timeCounter + 1)
+        }, 950)
 
         return () => clearInterval(myInterval);
-    });
+    }, [timeCounter, setTimeCounter]);
 
     return (
         <div className='timer'>
-            {minutes === 0 && seconds === 0
-                ? '00:00'
-                : <span>{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}</span>
-            }
+            <span>{counterFormat(timeCounter)}</span>
         </div>
     )
 }

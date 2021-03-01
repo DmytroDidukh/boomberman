@@ -2,7 +2,7 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import Cell from "../../components/cell";
-import {changeGameStatus, openCell, setFlag} from "../../redux/actions";
+import {changeGameStatus, openCell, setFlag, setGameTime} from "../../redux/actions";
 import getAllSafeCellsAround from "../../utils/getAllSafeCellsAround";
 import {getSecondsFromTimestamp} from "../../utils/getReadableTime";
 import {checkPlayerExist, updateExistedPlayer, savePlayerToLeaderboard} from "../../db/api";
@@ -30,6 +30,7 @@ const Field = ({setDialogOpen}) => {
             )
 
             dispatch(changeGameStatus(GAME_STATUS_DATA.lost))
+            dispatch(setGameTime({gameEnd: Date.now()}))
             setDialogOpen(true)
             return;
         }
@@ -41,10 +42,11 @@ const Field = ({setDialogOpen}) => {
 
         if (field.length * 10 === openedCellsLength + numberOfBombs) {
             dispatch(changeGameStatus(GAME_STATUS_DATA.won))
+            dispatch(setGameTime({gameEnd: Date.now()}))
             setDialogOpen(true)
 
             const existedPlayer = await checkPlayerExist(player.username, player.gameMode)
-            const atomicTime = getSecondsFromTimestamp(gameTime)
+            const atomicTime = getSecondsFromTimestamp({...gameTime, gameEnd: Date.now()})
 
             if (existedPlayer && existedPlayer.gameTime >= atomicTime) {
                 updateExistedPlayer(existedPlayer.id, atomicTime)
