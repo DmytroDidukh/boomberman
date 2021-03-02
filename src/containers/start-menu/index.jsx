@@ -20,7 +20,7 @@ import './styles.scss'
 const inputRegExpValidator = (value) => /^[a-zA-Z\s]{2,30}$/.test(value)
 
 const StartMenu = () => {
-    const {field, numberOfBombs, gameMode, player} = useSelector((state) => state)
+    const {field, numberOfBombs, gameMode, player, fieldSize} = useSelector((state) => state)
     const dispatch = useDispatch()
 
     const [inputValue, setInputValue] = useState(player.username)
@@ -50,7 +50,7 @@ const StartMenu = () => {
 
         dispatch(setField({field: updatedField, numberOfFieldItems: numberOfBombs}))
         dispatch(changeGameStatus(GAME_STATUS_DATA.playing))
-        dispatch(setPlayer({...player, username: inputValue, gameMode}))
+        dispatch(setPlayer({...player, username: inputValue, gameMode: GAME_MODE_DATA[gameMode].name.toLowerCase()}))
         dispatch(setGameTime({gameStart: Date.now()}))
     }
 
@@ -80,12 +80,12 @@ const StartMenu = () => {
                 <StartMenuItem data={FIELD_SIZE_DATA}
                                action={changeFieldSize}
                                dispatch={dispatch}
-                               initialValue={10}
+                               initialValue={FIELD_SIZE_DATA[fieldSize].value}
                                id='Field size'/>
                 <StartMenuItem data={GAME_MODE_DATA}
                                action={changeGameMode}
                                dispatch={dispatch}
-                               initialValue={0}
+                               initialValue={GAME_MODE_DATA[gameMode].value}
                                id='Game mode'/>
                 <Button variant="contained"
                         color="primary"

@@ -11,13 +11,13 @@ import {
     RESET_GAME_TIME,
 } from "./types";
 import createField from "../utils/createField";
-import getPercentageOfFieldItems from "../utils/getPercentageOfFieldItems";
 
 export const initialState = {
     numberOfBombs: 10,
     numberOfFlags: 10,
     gameStatus: 'preparing',
-    gameMode: 'easy',
+    gameMode: 0,
+    fieldSize: 0,
     field: createField(10),
     player: {
         username: '',
@@ -70,20 +70,19 @@ export const rootReducer = (state = initialState, action) => {
         }
         case CHANGE_FIELD_SIZE: {
             const {gameMode} = state
-            const gameModePercentage = getPercentageOfFieldItems(gameMode)
-            const numberOfFieldItems = action.payload * 10 * gameModePercentage
+            const convertedFieldSize = (action.payload + 1) * 10
+            const numberOfFieldItems = convertedFieldSize * (gameMode + 1)
 
             return {
                 ...state,
-                field: createField(action.payload),
+                field: createField(convertedFieldSize),
+                fieldSize: action.payload,
                 numberOfBombs: numberOfFieldItems,
                 numberOfFlags: numberOfFieldItems,
             }
         }
         case CHANGE_GAME_MODE: {
-            const gameMode = action.payload
-            const gameModePercentage = getPercentageOfFieldItems(gameMode)
-            const numberOfFieldItems = state.field.length * 10 * gameModePercentage
+            const numberOfFieldItems = (state.fieldSize + 1) * 10 * (action.payload + 1)
 
             return {
                 ...state,

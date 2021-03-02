@@ -5,9 +5,9 @@ export const GAME_MODE_DATA = [
 ]
 
 export const FIELD_SIZE_DATA = [
-    {value: 10, name: '10x10'},
-    {value: 20, name: '20x20'},
-    {value: 30, name: '30x30'}
+    {value: 0, name: '10x10'},
+    {value: 1, name: '20x20'},
+    {value: 2, name: '30x30'}
 ]
 
 export const GAME_STATUS_DATA = {
